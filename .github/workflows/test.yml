@@ -1,12 +1,6 @@
 name: Tests
 
-on:
-  push:
-    branches:
-      - main
-    paths:
-      - "src/**"
-      - "tests/**"
+on: [push, pull_request]
 
 jobs:
   test:
