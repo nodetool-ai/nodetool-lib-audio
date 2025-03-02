@@ -19,7 +19,3 @@ nodetool-core = { git = "https://github.com/nodetool-ai/nodetool-core.git", rev 
 pydub = "0.25.1"
 librosa = "0.10.2"
 pedalboard = "0.9.16"
-
-
-[tool.poetry.requires-plugins]
-poetry-plugin-export = ">=1.8"
