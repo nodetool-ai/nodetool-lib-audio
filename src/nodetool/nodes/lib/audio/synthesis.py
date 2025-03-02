@@ -12,13 +12,6 @@ class PitchEnvelopeCurve(Enum):
     EXPONENTIAL = "exponential"
 
 
-class OscillatorWaveform(Enum):
-    SINE = "sine"
-    SQUARE = "square"
-    SAWTOOTH = "sawtooth"
-    TRIANGLE = "triangle"
-
-
 class Oscillator(BaseNode):
     """
     Generates basic waveforms (sine, square, sawtooth, triangle).
@@ -29,6 +22,12 @@ class Oscillator(BaseNode):
     - Generate test signals
     - Build complex sounds from basic waves
     """
+
+    class OscillatorWaveform(Enum):
+        SINE = "sine"
+        SQUARE = "square"
+        SAWTOOTH = "sawtooth"
+        TRIANGLE = "triangle"
 
     waveform: OscillatorWaveform = Field(
         default=OscillatorWaveform.SINE,
