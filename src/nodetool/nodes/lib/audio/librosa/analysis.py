@@ -1,26 +1,15 @@
-import io
 import librosa
-from matplotlib import pyplot as plt
 import numpy as np
 from pydantic import Field
 from nodetool.metadata.types import AudioRef, NPArray
 from nodetool.workflows.base_node import BaseNode
-from nodetool.workflows.processing_context import ProcessingContext
-import numpy as np
-
-from nodetool.workflows.base_node import BaseNode
-from nodetool.workflows.processing_context import ProcessingContext
-import librosa
 from nodetool.metadata.types import NPArray
 from nodetool.workflows.processing_context import ProcessingContext
 from nodetool.nodes.lib.audio.audio_helpers import (
     convert_to_float,
 )
-from nodetool.metadata.types import AudioRef
 from nodetool.metadata.types import ImageRef
-from nodetool.workflows.base_node import BaseNode
-from pydantic import Field
-from typing import Any, Literal, Optional
+from typing import Any, Optional
 
 
 class AmplitudeToDB(BaseNode):
@@ -259,15 +248,29 @@ class PlotSpectrogram(BaseNode):
     fmax: int = Field(default=8000, ge=0, description="The highest frequency (in Hz).")
 
     async def process(self, context: ProcessingContext) -> ImageRef:
+        import io
+        from PIL import Image
+
+        # Get the spectrogram data
         spec = self.tensor.to_numpy()
-        plt.figure(figsize=(10, 10))
-        librosa.display.specshow(spec, y_axis="mel", fmax=self.fmax, x_axis="time")
-        plt.colorbar(format="%+2.0f dB")
-        plt.title("Mel spectrogram")
-        plt.tight_layout()
+
+        # Normalize the spectrogram data to 0-255 range for image
+        spec_normalized = spec - np.min(spec)
+        if np.max(spec_normalized) > 0:
+            spec_normalized = spec_normalized / np.max(spec_normalized) * 255
+
+        # Convert to uint8 for image creation
+        spec_img = spec_normalized.astype(np.uint8)
+
+        # Create an image from the array
+        # Transpose to get frequency on y-axis and time on x-axis
+        img = Image.fromarray(spec_img).transpose(Image.Transpose.TRANSPOSE)
+
+        # Save to bytes buffer
         buf = io.BytesIO()
-        plt.savefig(buf, format="png")
+        img.save(buf, format="PNG")
         buf.seek(0)
+
         return await context.image_from_bytes(buf.getvalue())
 
     def result_for_client(self, result: dict[str, Any]) -> dict[str, Any]:
