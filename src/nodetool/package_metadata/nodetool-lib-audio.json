@@ -5,6 +5,7 @@
   "authors": [
     "Matthias Georgi <matti.georgi@gmail.com>"
   ],
+  "repo_id": "nodetool-ai/nodetool-lib-audio",
   "nodes": [
     {
       "title": "Convert To Array",
@@ -1977,7 +1978,7 @@
               "sawtooth",
               "triangle"
             ],
-            "type_name": "lib.audio.synthesis.OscillatorWaveform"
+            "type_name": "nodetool.nodes.lib.audio.synthesis.OscillatorWaveform"
           },
           "default": "sine",
           "title": "Waveform",
@@ -2055,7 +2056,7 @@
               "linear",
               "exponential"
             ],
-            "type_name": "lib.audio.synthesis.PitchEnvelopeCurve"
+            "type_name": "nodetool.nodes.lib.audio.synthesis.PitchEnvelopeCurve"
           },
           "default": "linear",
           "title": "Pitch Envelope Curve",
