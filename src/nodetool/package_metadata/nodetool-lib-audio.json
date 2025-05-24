@@ -8,860 +8,10 @@
   "repo_id": "nodetool-ai/nodetool-lib-audio",
   "nodes": [
     {
-      "title": "Convert To Array",
-      "description": "Converts an audio file to a Array for further processing.\n    audio, conversion, tensor\n\n    Use cases:\n    - Prepare audio data for machine learning models\n    - Enable signal processing operations on audio\n    - Convert audio to a format suitable for spectral analysisr",
-      "namespace": "lib.audio.conversion",
-      "node_type": "lib.audio.conversion.ConvertToArray",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "audio",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "Audio",
-          "description": "The audio file to convert to a tensor."
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "np_array"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "audio"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "Create Silence",
-      "description": "Creates a silent audio file with a specified duration.\n    audio, silence, empty\n\n    Use cases:\n    - Generate placeholder audio files\n    - Create audio segments for padding or spacing\n    - Add silence to the beginning or end of audio files",
-      "namespace": "lib.audio.conversion",
-      "node_type": "lib.audio.conversion.CreateSilence",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "duration",
-          "type": {
-            "type": "float"
-          },
-          "default": 1.0,
-          "title": "Duration",
-          "description": "The duration of the silence in seconds.",
-          "min": 0.0
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "audio"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "duration"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "Trim",
-      "description": "Trim an audio file to a specified duration.\n    audio, trim, cut\n\n    Use cases:\n    - Remove silence from the beginning or end of audio files\n    - Extract specific segments from audio files\n    - Prepare audio data for machine learning models",
-      "namespace": "lib.audio.conversion",
-      "node_type": "lib.audio.conversion.Trim",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "audio",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "Audio",
-          "description": "The audio file to trim."
-        },
-        {
-          "name": "start",
-          "type": {
-            "type": "float"
-          },
-          "default": 0.0,
-          "title": "Start",
-          "description": "The start time of the trimmed audio in seconds.",
-          "min": 0.0
-        },
-        {
-          "name": "end",
-          "type": {
-            "type": "float"
-          },
-          "default": 0.0,
-          "title": "End",
-          "description": "The end time of the trimmed audio in seconds.",
-          "min": 0.0
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "audio"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "audio",
-        "start",
-        "end"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "Audio Mixer",
-      "description": "Mix up to 5 audio tracks together with individual volume controls.\n    audio, mix, volume, combine, blend, layer, add, overlay\n\n    Use cases:\n    - Mix multiple audio tracks into a single output\n    - Create layered soundscapes\n    - Combine music, voice, and sound effects\n    - Adjust individual track volumes",
-      "namespace": "lib.audio.transform",
-      "node_type": "lib.audio.transform.AudioMixer",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "track1",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "Track1",
-          "description": "First audio track to mix."
-        },
-        {
-          "name": "track2",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "Track2",
-          "description": "Second audio track to mix."
-        },
-        {
-          "name": "track3",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "Track3",
-          "description": "Third audio track to mix."
-        },
-        {
-          "name": "track4",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "Track4",
-          "description": "Fourth audio track to mix."
-        },
-        {
-          "name": "track5",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "Track5",
-          "description": "Fifth audio track to mix."
-        },
-        {
-          "name": "volume1",
-          "type": {
-            "type": "float"
-          },
-          "default": 1.0,
-          "title": "Volume1",
-          "description": "Volume for track 1. 1.0 is original volume.",
-          "min": 0.0,
-          "max": 2.0
-        },
-        {
-          "name": "volume2",
-          "type": {
-            "type": "float"
-          },
-          "default": 1.0,
-          "title": "Volume2",
-          "description": "Volume for track 2. 1.0 is original volume.",
-          "min": 0.0,
-          "max": 2.0
-        },
-        {
-          "name": "volume3",
-          "type": {
-            "type": "float"
-          },
-          "default": 1.0,
-          "title": "Volume3",
-          "description": "Volume for track 3. 1.0 is original volume.",
-          "min": 0.0,
-          "max": 2.0
-        },
-        {
-          "name": "volume4",
-          "type": {
-            "type": "float"
-          },
-          "default": 1.0,
-          "title": "Volume4",
-          "description": "Volume for track 4. 1.0 is original volume.",
-          "min": 0.0,
-          "max": 2.0
-        },
-        {
-          "name": "volume5",
-          "type": {
-            "type": "float"
-          },
-          "default": 1.0,
-          "title": "Volume5",
-          "description": "Volume for track 5. 1.0 is original volume.",
-          "min": 0.0,
-          "max": 2.0
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "audio"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "track1",
-        "track2",
-        "track3",
-        "track4",
-        "track5",
-        "volume1",
-        "volume2",
-        "volume3",
-        "volume4",
-        "volume5"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "Concat",
-      "description": "Concatenates two audio files together.\n    audio, edit, join, +\n\n    Use cases:\n    - Combine multiple audio clips into a single file\n    - Create longer audio tracks from shorter segments",
-      "namespace": "lib.audio.transform",
-      "node_type": "lib.audio.transform.Concat",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "a",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "A",
-          "description": "The first audio file."
-        },
-        {
-          "name": "b",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "B",
-          "description": "The second audio file."
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "audio"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "a",
-        "b"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "Concat List",
-      "description": "Concatenates multiple audio files together in sequence.\n    audio, edit, join, multiple, +\n\n    Use cases:\n    - Combine multiple audio clips into a single file\n    - Create longer audio tracks from multiple segments\n    - Chain multiple audio files in order",
-      "namespace": "lib.audio.transform",
-      "node_type": "lib.audio.transform.ConcatList",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "audio_files",
-          "type": {
-            "type": "list",
-            "type_args": [
-              {
-                "type": "audio"
-              }
-            ]
-          },
-          "default": [],
-          "title": "Audio Files",
-          "description": "List of audio files to concatenate in sequence."
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "audio"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "audio_files"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "Fade In",
-      "description": "Applies a fade-in effect to the beginning of an audio file.\n    audio, edit, transition\n\n    Use cases:\n    - Create smooth introductions to audio tracks\n    - Gradually increase volume at the start of a clip",
-      "namespace": "lib.audio.transform",
-      "node_type": "lib.audio.transform.FadeIn",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "audio",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "Audio",
-          "description": "The audio file to apply fade-in to."
-        },
-        {
-          "name": "duration",
-          "type": {
-            "type": "float"
-          },
-          "default": 1.0,
-          "title": "Duration",
-          "description": "Duration of the fade-in effect in seconds.",
-          "min": 0.0
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "audio"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "audio",
-        "duration"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "Fade Out",
-      "description": "Applies a fade-out effect to the end of an audio file.\n    audio, edit, transition\n\n    Use cases:\n    - Create smooth endings to audio tracks\n    - Gradually decrease volume at the end of a clip",
-      "namespace": "lib.audio.transform",
-      "node_type": "lib.audio.transform.FadeOut",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "audio",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "Audio",
-          "description": "The audio file to apply fade-out to."
-        },
-        {
-          "name": "duration",
-          "type": {
-            "type": "float"
-          },
-          "default": 1.0,
-          "title": "Duration",
-          "description": "Duration of the fade-out effect in seconds.",
-          "min": 0.0
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "audio"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "audio",
-        "duration"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "Mono To Stereo",
-      "description": "Converts a mono audio signal to stereo.\n    audio, convert, channels\n\n    Use cases:\n    - Expand mono recordings for stereo playback systems\n    - Prepare audio for further stereo processing",
-      "namespace": "lib.audio.transform",
-      "node_type": "lib.audio.transform.MonoToStereo",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "audio",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "Audio",
-          "description": "The mono audio file to convert."
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "audio"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "audio"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "Normalize",
-      "description": "Normalizes the volume of an audio file.\n    audio, fix, dynamics, volume\n\n    Use cases:\n    - Ensure consistent volume across multiple audio files\n    - Adjust overall volume level before further processing",
-      "namespace": "lib.audio.transform",
-      "node_type": "lib.audio.transform.Normalize",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "audio",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "Audio",
-          "description": "The audio file to normalize."
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "audio"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "audio"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "Overlay Audio",
-      "description": "Overlays two audio files together.\n    audio, edit, transform\n\n    Use cases:\n    - Mix background music with voice recording\n    - Layer sound effects over an existing audio track",
-      "namespace": "lib.audio.transform",
-      "node_type": "lib.audio.transform.OverlayAudio",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "a",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "A",
-          "description": "The first audio file."
-        },
-        {
-          "name": "b",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "B",
-          "description": "The second audio file."
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "audio"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "a",
-        "b"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "Remove Silence",
-      "description": "Removes or shortens silence in an audio file with smooth transitions.\n    audio, edit, clean\n\n    Use cases:\n    - Trim silent parts from beginning/end of recordings\n    - Remove or shorten long pauses between speech segments\n    - Apply crossfade for smooth transitions",
-      "namespace": "lib.audio.transform",
-      "node_type": "lib.audio.transform.RemoveSilence",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "audio",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "Audio",
-          "description": "The audio file to process."
-        },
-        {
-          "name": "min_length",
-          "type": {
-            "type": "int"
-          },
-          "default": 200,
-          "title": "Min Length",
-          "description": "Minimum length of silence to be processed (in milliseconds).",
-          "min": 0.0,
-          "max": 10000.0
-        },
-        {
-          "name": "threshold",
-          "type": {
-            "type": "int"
-          },
-          "default": -40,
-          "title": "Threshold",
-          "description": "Silence threshold in dB (relative to full scale). Higher values detect more silence.",
-          "min": -60.0,
-          "max": 0.0
-        },
-        {
-          "name": "reduction_factor",
-          "type": {
-            "type": "float"
-          },
-          "default": 1.0,
-          "title": "Reduction Factor",
-          "description": "Factor to reduce silent parts (0.0 to 1.0). 0.0 keeps silence as is, 1.0 removes it completely.",
-          "min": 0.0,
-          "max": 1.0
-        },
-        {
-          "name": "crossfade",
-          "type": {
-            "type": "int"
-          },
-          "default": 10,
-          "title": "Crossfade",
-          "description": "Duration of crossfade in milliseconds to apply between segments for smooth transitions.",
-          "min": 0.0,
-          "max": 50.0
-        },
-        {
-          "name": "min_silence_between_parts",
-          "type": {
-            "type": "int"
-          },
-          "default": 100,
-          "title": "Min Silence Between Parts",
-          "description": "Minimum silence duration in milliseconds to maintain between non-silent segments",
-          "min": 0.0,
-          "max": 500.0
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "audio"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "audio",
-        "min_length",
-        "threshold",
-        "reduction_factor",
-        "crossfade",
-        "min_silence_between_parts"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "Repeat",
-      "description": "Loops an audio file a specified number of times.\n    audio, edit, repeat\n\n    Use cases:\n    - Create repeating background sounds or music\n    - Extend short audio clips to fill longer durations\n    - Generate rhythmic patterns from short samples",
-      "namespace": "lib.audio.transform",
-      "node_type": "lib.audio.transform.Repeat",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "audio",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "Audio",
-          "description": "The audio file to loop."
-        },
-        {
-          "name": "loops",
-          "type": {
-            "type": "int"
-          },
-          "default": 2,
-          "title": "Loops",
-          "description": "Number of times to loop the audio. Minimum 1 (plays once), maximum 100.",
-          "min": 1.0,
-          "max": 100.0
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "audio"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "audio",
-        "loops"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "Reverse",
-      "description": "Reverses an audio file.\n    audio, edit, transform\n\n    Use cases:\n    - Create reverse audio effects\n    - Generate backwards speech or music",
-      "namespace": "lib.audio.transform",
-      "node_type": "lib.audio.transform.Reverse",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "audio",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "Audio",
-          "description": "The audio file to reverse."
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "audio"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "audio"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "Slice Audio",
-      "description": "Extracts a section of an audio file.\n    audio, edit, trim\n\n    Use cases:\n    - Cut out a specific clip from a longer audio file\n    - Remove unwanted portions from beginning or end",
-      "namespace": "lib.audio.transform",
-      "node_type": "lib.audio.transform.SliceAudio",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "audio",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "Audio",
-          "description": "The audio file."
-        },
-        {
-          "name": "start",
-          "type": {
-            "type": "float"
-          },
-          "default": 0.0,
-          "title": "Start",
-          "description": "The start time in seconds.",
-          "min": 0.0
-        },
-        {
-          "name": "end",
-          "type": {
-            "type": "float"
-          },
-          "default": 1.0,
-          "title": "End",
-          "description": "The end time in seconds.",
-          "min": 0.0
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "audio"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "audio",
-        "start",
-        "end"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "Stereo To Mono",
-      "description": "Converts a stereo audio signal to mono.\n    audio, convert, channels\n\n    Use cases:\n    - Reduce file size for mono-only applications\n    - Simplify audio for certain processing tasks",
-      "namespace": "lib.audio.transform",
-      "node_type": "lib.audio.transform.StereoToMono",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "audio",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "Audio",
-          "description": "The stereo audio file to convert."
-        },
-        {
-          "name": "method",
-          "type": {
-            "type": "str"
-          },
-          "default": "average",
-          "title": "Method",
-          "description": "Method to use for conversion: 'average', 'left', or 'right'."
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "audio"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "audio",
-        "method"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "Tone",
-      "description": "Generates a constant tone signal.\n    audio, generate, sound\n\n    Use cases:\n    - Create test tones for audio equipment calibration\n    - Produce reference pitches for musical applications",
-      "namespace": "lib.audio.transform",
-      "node_type": "lib.audio.transform.Tone",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "frequency",
-          "type": {
-            "type": "float"
-          },
-          "default": 440.0,
-          "title": "Frequency",
-          "description": "Frequency of the tone in Hertz."
-        },
-        {
-          "name": "sampling_rate",
-          "type": {
-            "type": "int"
-          },
-          "default": 44100,
-          "title": "Sampling Rate",
-          "description": "Sampling rate.",
-          "min": 0.0,
-          "max": 44100.0
-        },
-        {
-          "name": "duration",
-          "type": {
-            "type": "float"
-          },
-          "default": 1.0,
-          "title": "Duration",
-          "description": "Duration of the tone in seconds."
-        },
-        {
-          "name": "phi",
-          "type": {
-            "type": "float"
-          },
-          "default": 0.0,
-          "title": "Phi",
-          "description": "Initial phase of the waveform in radians."
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "np_array"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "frequency",
-        "sampling_rate",
-        "duration",
-        "phi"
-      ],
-      "is_dynamic": false
-    },
-    {
       "title": "Bitcrush",
       "description": "Applies a bitcrushing effect to an audio file, reducing bit depth and/or sample rate.\n    audio, effect, distortion\n\n    Use cases:\n    - Create lo-fi or retro-style audio effects\n    - Simulate vintage digital audio equipment\n    - Add digital distortion and artifacts to sounds",
-      "namespace": "lib.audio.pedalboard",
-      "node_type": "lib.audio.pedalboard.Bitcrush",
+      "namespace": "lib.pedalboard",
+      "node_type": "lib.pedalboard.Bitcrush",
       "layout": "default",
       "properties": [
         {
@@ -916,8 +66,8 @@
     {
       "title": "Compress",
       "description": "Applies dynamic range compression to an audio file.\n    audio, effect, dynamics\n\n    Use cases:\n    - Even out volume levels in a recording\n    - Increase perceived loudness of audio\n    - Control peaks in audio signals",
-      "namespace": "lib.audio.pedalboard",
-      "node_type": "lib.audio.pedalboard.Compress",
+      "namespace": "lib.pedalboard",
+      "node_type": "lib.pedalboard.Compress",
       "layout": "default",
       "properties": [
         {
@@ -996,8 +146,8 @@
     {
       "title": "Delay",
       "description": "Applies a delay effect to an audio file.\n    audio, effect, time-based\n\n    Use cases:\n    - Create echo effects\n    - Add spaciousness to sounds\n    - Produce rhythmic patterns",
-      "namespace": "lib.audio.pedalboard",
-      "node_type": "lib.audio.pedalboard.Delay",
+      "namespace": "lib.pedalboard",
+      "node_type": "lib.pedalboard.Delay",
       "layout": "default",
       "properties": [
         {
@@ -1064,8 +214,8 @@
     {
       "title": "Distortion",
       "description": "Applies a distortion effect to an audio file.\n    audio, effect, distortion\n\n    Use cases:\n    - Add grit and character to instruments\n    - Create aggressive sound effects\n    - Simulate overdriven amplifiers",
-      "namespace": "lib.audio.pedalboard",
-      "node_type": "lib.audio.pedalboard.Distortion",
+      "namespace": "lib.pedalboard",
+      "node_type": "lib.pedalboard.Distortion",
       "layout": "default",
       "properties": [
         {
@@ -1108,8 +258,8 @@
     {
       "title": "Gain",
       "description": "Applies a gain (volume adjustment) to an audio file.\n    audio, effect, volume\n\n    Use cases:\n    - Increase or decrease overall volume of audio\n    - Balance levels between different audio tracks\n    - Prepare audio for further processing",
-      "namespace": "lib.audio.pedalboard",
-      "node_type": "lib.audio.pedalboard.Gain",
+      "namespace": "lib.pedalboard",
+      "node_type": "lib.pedalboard.Gain",
       "layout": "default",
       "properties": [
         {
@@ -1152,8 +302,8 @@
     {
       "title": "High Pass Filter",
       "description": "Applies a high-pass filter to attenuate frequencies below a cutoff point.\n    audio, effect, equalizer\n\n    Use cases:\n    - Remove low-frequency rumble or noise\n    - Clean up the low end of a mix\n    - Create filter sweep effects",
-      "namespace": "lib.audio.pedalboard",
-      "node_type": "lib.audio.pedalboard.HighPassFilter",
+      "namespace": "lib.pedalboard",
+      "node_type": "lib.pedalboard.HighPassFilter",
       "layout": "default",
       "properties": [
         {
@@ -1196,8 +346,8 @@
     {
       "title": "High Shelf Filter",
       "description": "Applies a high shelf filter to boost or cut high frequencies.\n    audio, effect, equalizer\n\n    Use cases:\n    - Enhance or reduce treble frequencies\n    - Add brightness or air to audio\n    - Tame harsh high frequencies",
-      "namespace": "lib.audio.pedalboard",
-      "node_type": "lib.audio.pedalboard.HighShelfFilter",
+      "namespace": "lib.pedalboard",
+      "node_type": "lib.pedalboard.HighShelfFilter",
       "layout": "default",
       "properties": [
         {
@@ -1252,8 +402,8 @@
     {
       "title": "Limiter",
       "description": "Applies a limiter effect to an audio file.\n    audio, effect, dynamics\n\n    Use cases:\n    - Prevent audio clipping\n    - Increase perceived loudness without distortion\n    - Control dynamic range of audio",
-      "namespace": "lib.audio.pedalboard",
-      "node_type": "lib.audio.pedalboard.Limiter",
+      "namespace": "lib.pedalboard",
+      "node_type": "lib.pedalboard.Limiter",
       "layout": "default",
       "properties": [
         {
@@ -1308,8 +458,8 @@
     {
       "title": "Low Pass Filter",
       "description": "Applies a low-pass filter to attenuate frequencies above a cutoff point.\n    audio, effect, equalizer\n\n    Use cases:\n    - Reduce high-frequency harshness\n    - Simulate muffled or distant sounds\n    - Create dub-style effects",
-      "namespace": "lib.audio.pedalboard",
-      "node_type": "lib.audio.pedalboard.LowPassFilter",
+      "namespace": "lib.pedalboard",
+      "node_type": "lib.pedalboard.LowPassFilter",
       "layout": "default",
       "properties": [
         {
@@ -1352,8 +502,8 @@
     {
       "title": "Low Shelf Filter",
       "description": "Applies a low shelf filter to boost or cut low frequencies.\n    audio, effect, equalizer\n\n    Use cases:\n    - Enhance or reduce bass frequencies\n    - Shape the low-end response of audio\n    - Compensate for speaker or room deficiencies",
-      "namespace": "lib.audio.pedalboard",
-      "node_type": "lib.audio.pedalboard.LowShelfFilter",
+      "namespace": "lib.pedalboard",
+      "node_type": "lib.pedalboard.LowShelfFilter",
       "layout": "default",
       "properties": [
         {
@@ -1408,8 +558,8 @@
     {
       "title": "Noise Gate",
       "description": "Applies a noise gate effect to an audio file.\n    audio, effect, dynamics\n\n    Use cases:\n    - Reduce background noise in recordings\n    - Clean up audio tracks with unwanted low-level sounds\n    - Create rhythmic effects by gating sustained sounds",
-      "namespace": "lib.audio.pedalboard",
-      "node_type": "lib.audio.pedalboard.NoiseGate",
+      "namespace": "lib.pedalboard",
+      "node_type": "lib.pedalboard.NoiseGate",
       "layout": "default",
       "properties": [
         {
@@ -1476,8 +626,8 @@
     {
       "title": "Peak Filter",
       "description": "Applies a peak filter to boost or cut a specific frequency range.\n    audio, effect, equalizer\n\n    Use cases:\n    - Isolate specific frequency ranges\n    - Create telephone or radio voice effects\n    - Focus on particular instrument ranges in a mix",
-      "namespace": "lib.audio.pedalboard",
-      "node_type": "lib.audio.pedalboard.PeakFilter",
+      "namespace": "lib.pedalboard",
+      "node_type": "lib.pedalboard.PeakFilter",
       "layout": "default",
       "properties": [
         {
@@ -1532,8 +682,8 @@
     {
       "title": "Phaser",
       "description": "Applies a phaser effect to an audio file.\n    audio, effect, modulation\n\n    Use cases:\n    - Create sweeping, swooshing sounds\n    - Add movement to static sounds\n    - Produce psychedelic or space-like effects",
-      "namespace": "lib.audio.pedalboard",
-      "node_type": "lib.audio.pedalboard.Phaser",
+      "namespace": "lib.pedalboard",
+      "node_type": "lib.pedalboard.Phaser",
       "layout": "default",
       "properties": [
         {
@@ -1624,8 +774,8 @@
     {
       "title": "Pitch Shift",
       "description": "Shifts the pitch of an audio file without changing its duration.\n    audio, effect, pitch\n\n    Use cases:\n    - Transpose audio to a different key\n    - Create harmonies or vocal effects\n    - Adjust instrument tuning",
-      "namespace": "lib.audio.pedalboard",
-      "node_type": "lib.audio.pedalboard.PitchShift",
+      "namespace": "lib.pedalboard",
+      "node_type": "lib.pedalboard.PitchShift",
       "layout": "default",
       "properties": [
         {
@@ -1668,8 +818,8 @@
     {
       "title": "Reverb",
       "description": "Applies a reverb effect to an audio file.\n    audio, effect, reverb\n\n    Use cases:\n    - Add spatial depth to dry recordings\n    - Simulate different room acoustics\n    - Create atmospheric sound effects",
-      "namespace": "lib.audio.pedalboard",
-      "node_type": "lib.audio.pedalboard.Reverb",
+      "namespace": "lib.pedalboard",
+      "node_type": "lib.pedalboard.Reverb",
       "layout": "default",
       "properties": [
         {
@@ -1748,8 +898,8 @@
     {
       "title": "Time Stretch",
       "description": "Changes the speed of an audio file without altering its pitch.\n    audio, transform, time\n\n    Use cases:\n    - Adjust audio duration to fit video length\n    - Create slow-motion or fast-motion audio effects\n    - Synchronize audio tracks of different lengths",
-      "namespace": "lib.audio.pedalboard",
-      "node_type": "lib.audio.pedalboard.TimeStretch",
+      "namespace": "lib.pedalboard",
+      "node_type": "lib.pedalboard.TimeStretch",
       "layout": "default",
       "properties": [
         {
@@ -1792,8 +942,8 @@
     {
       "title": "Envelope",
       "description": "Applies an ADR (Attack-Decay-Release) envelope to an audio signal.\n    audio, synthesis, envelope\n\n    Use cases:\n    - Shape the amplitude of synthesized sounds\n    - Create percussion-like instruments\n    - Control sound dynamics",
-      "namespace": "lib.audio.synthesis",
-      "node_type": "lib.audio.synthesis.Envelope",
+      "namespace": "lib.synthesis",
+      "node_type": "lib.synthesis.Envelope",
       "layout": "default",
       "properties": [
         {
@@ -1872,8 +1022,8 @@
     {
       "title": "FM Synthesis",
       "description": "Performs FM (Frequency Modulation) synthesis.\n    audio, synthesis, modulation\n\n    Use cases:\n    - Create complex timbres\n    - Generate bell-like sounds\n    - Synthesize metallic tones",
-      "namespace": "lib.audio.synthesis",
-      "node_type": "lib.audio.synthesis.FM_Synthesis",
+      "namespace": "lib.synthesis",
+      "node_type": "lib.synthesis.FM_Synthesis",
       "layout": "default",
       "properties": [
         {
@@ -1964,8 +1114,8 @@
     {
       "title": "Oscillator",
       "description": "Generates basic waveforms (sine, square, sawtooth, triangle).\n    audio, synthesis, waveform\n\n    Use cases:\n    - Create fundamental waveforms for synthesis\n    - Generate test signals\n    - Build complex sounds from basic waves",
-      "namespace": "lib.audio.synthesis",
-      "node_type": "lib.audio.synthesis.Oscillator",
+      "namespace": "lib.synthesis",
+      "node_type": "lib.synthesis.Oscillator",
       "layout": "default",
       "properties": [
         {
@@ -1978,7 +1128,7 @@
               "sawtooth",
               "triangle"
             ],
-            "type_name": "nodetool.nodes.lib.audio.synthesis.OscillatorWaveform"
+            "type_name": "nodetool.nodes.lib.synthesis.OscillatorWaveform"
           },
           "default": "sine",
           "title": "Waveform",
@@ -2056,7 +1206,7 @@
               "linear",
               "exponential"
             ],
-            "type_name": "nodetool.nodes.lib.audio.synthesis.PitchEnvelopeCurve"
+            "type_name": "nodetool.nodes.lib.synthesis.PitchEnvelopeCurve"
           },
           "default": "linear",
           "title": "Pitch Envelope Curve",
@@ -2088,8 +1238,8 @@
     {
       "title": "Pink Noise",
       "description": "Generates pink noise (1/f noise).\n    audio, synthesis, noise\n\n    Use cases:\n    - Create natural-sounding background noise\n    - Test speaker response\n    - Sound masking",
-      "namespace": "lib.audio.synthesis",
-      "node_type": "lib.audio.synthesis.PinkNoise",
+      "namespace": "lib.synthesis",
+      "node_type": "lib.synthesis.PinkNoise",
       "layout": "default",
       "properties": [
         {
@@ -2144,8 +1294,8 @@
     {
       "title": "White Noise",
       "description": "Generates white noise.\n    audio, synthesis, noise\n\n    Use cases:\n    - Create background ambience\n    - Generate percussion sounds\n    - Test audio equipment",
-      "namespace": "lib.audio.synthesis",
-      "node_type": "lib.audio.synthesis.WhiteNoise",
+      "namespace": "lib.synthesis",
+      "node_type": "lib.synthesis.WhiteNoise",
       "layout": "default",
       "properties": [
         {
@@ -2198,686 +1348,10 @@
       "is_dynamic": false
     },
     {
-      "title": "Amplitude To DB",
-      "description": "Converts an amplitude spectrogram to a dB-scaled spectrogram.\n    audio, analysis, spectrogram\n\n    This node is useful for:\n    - Compressing the dynamic range of spectrograms for visualization\n    - Preparing input for audio models that expect dB-scaled data",
-      "namespace": "lib.audio.librosa.analysis",
-      "node_type": "lib.audio.librosa.analysis.AmplitudeToDB",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "tensor",
-          "type": {
-            "type": "np_array"
-          },
-          "default": {},
-          "title": "Tensor",
-          "description": "The amplitude tensor to be converted to dB scale."
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "np_array"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "tensor"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "Chroma STFT",
-      "description": "This node creates a chromagram from a waveform or power spectrogram to identify different pitch classes in an audio signal.\n    audio, analysis, chromagram, pitch\n\n    Applications:\n    - Chord recognition in music\n    - Music genre classification based on pitch content",
-      "namespace": "lib.audio.librosa.analysis",
-      "node_type": "lib.audio.librosa.analysis.ChromaSTFT",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "audio",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "Audio",
-          "description": "The audio file to extract chromagram from."
-        },
-        {
-          "name": "n_fft",
-          "type": {
-            "type": "int"
-          },
-          "default": 2048,
-          "title": "N Fft",
-          "description": "The number of samples per frame.",
-          "min": 0.0
-        },
-        {
-          "name": "hop_length",
-          "type": {
-            "type": "int"
-          },
-          "default": 512,
-          "title": "Hop Length",
-          "description": "The number of samples between frames.",
-          "min": 0.0
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "np_array"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "audio",
-        "n_fft",
-        "hop_length"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "DBTo Amplitude",
-      "description": "The DBToAmplitude node Converts a dB-scaled spectrogram to an amplitude spectrogram.\n    audio, analysis, spectrogram\n    Useful for:\n    - Reversing dB scaling before audio synthesis\n    - Preparing data for models that expect linear amplitude scaling",
-      "namespace": "lib.audio.librosa.analysis",
-      "node_type": "lib.audio.librosa.analysis.DBToAmplitude",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "tensor",
-          "type": {
-            "type": "np_array"
-          },
-          "default": {},
-          "title": "Tensor",
-          "description": "The dB-scaled tensor to be converted to amplitude scale."
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "np_array"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "tensor"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "DBTo Power",
-      "description": "This node converts a decibel (dB) spectrogram back to power scale.\n    audio, analysis, spectrogram\n\n    Useful for:\n    - Reversing dB scaling for audio synthesis\n    - Preparing data for models that expect power-scaled data",
-      "namespace": "lib.audio.librosa.analysis",
-      "node_type": "lib.audio.librosa.analysis.DBToPower",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "tensor",
-          "type": {
-            "type": "np_array"
-          },
-          "default": {},
-          "title": "Tensor",
-          "description": "The tensor containing the decibel spectrogram."
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "np_array"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "tensor"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "Griffin Lim",
-      "description": "GriffinLim Node performs phase reconstruction on a magnitude spectrogram utilizing the Griffin-Lim algorithm.\n    audio, synthesis, phase reconstruction\n\n    Applications:\n    - Audio synthesis from spectrograms\n    - Phase reconstruction in audio processing pipelines",
-      "namespace": "lib.audio.librosa.analysis",
-      "node_type": "lib.audio.librosa.analysis.GriffinLim",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "magnitude_spectrogram",
-          "type": {
-            "type": "np_array"
-          },
-          "default": {},
-          "title": "Magnitude Spectrogram",
-          "description": "Magnitude spectrogram input for phase reconstruction."
-        },
-        {
-          "name": "n_iter",
-          "type": {
-            "type": "int"
-          },
-          "default": 32,
-          "title": "N Iter",
-          "description": "Number of iterations for the Griffin-Lim algorithm."
-        },
-        {
-          "name": "hop_length",
-          "type": {
-            "type": "int"
-          },
-          "default": 512,
-          "title": "Hop Length",
-          "description": "Number of samples between successive frames."
-        },
-        {
-          "name": "win_length",
-          "type": {
-            "type": "int",
-            "optional": true
-          },
-          "title": "Win Length",
-          "description": "Each frame of audio is windowed by `window()`. The window will be of length `win_length` and then padded with zeros to match `n_fft`."
-        },
-        {
-          "name": "window",
-          "type": {
-            "type": "str"
-          },
-          "default": "hann",
-          "title": "Window",
-          "description": "Type of window to use for Griffin-Lim transformation."
-        },
-        {
-          "name": "center",
-          "type": {
-            "type": "bool"
-          },
-          "default": true,
-          "title": "Center",
-          "description": "If True, the signal `y` is padded so that frame `D[:, t]` is centered at `y[t * hop_length]`."
-        },
-        {
-          "name": "length",
-          "type": {
-            "type": "int",
-            "optional": true
-          },
-          "title": "Length",
-          "description": "If given, the resulting signal will be zero-padded or clipped to this length."
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "np_array"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "magnitude_spectrogram",
-        "n_iter",
-        "hop_length",
-        "win_length",
-        "window",
-        "center",
-        "length"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "MFCC",
-      "description": "MFCC Node computes the Mel-frequency cepstral coefficients (MFCCs) from an audio signal.\n    audio, analysis, frequency, MFCC, MEL",
-      "namespace": "lib.audio.librosa.analysis",
-      "node_type": "lib.audio.librosa.analysis.MFCC",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "audio",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "Audio",
-          "description": "The audio file to extract MFCCs from."
-        },
-        {
-          "name": "n_mfcc",
-          "type": {
-            "type": "int"
-          },
-          "default": 13,
-          "title": "N Mfcc",
-          "description": "The number of MFCCs to extract.",
-          "min": 0.0
-        },
-        {
-          "name": "n_fft",
-          "type": {
-            "type": "int"
-          },
-          "default": 2048,
-          "title": "N Fft",
-          "description": "The number of samples per frame.",
-          "min": 0.0
-        },
-        {
-          "name": "hop_length",
-          "type": {
-            "type": "int"
-          },
-          "default": 512,
-          "title": "Hop Length",
-          "description": "The number of samples between frames.",
-          "min": 0.0
-        },
-        {
-          "name": "fmin",
-          "type": {
-            "type": "int"
-          },
-          "default": 0,
-          "title": "Fmin",
-          "description": "The lowest frequency (in Hz).",
-          "min": 0.0
-        },
-        {
-          "name": "fmax",
-          "type": {
-            "type": "int"
-          },
-          "default": 8000,
-          "title": "Fmax",
-          "description": "The highest frequency (in Hz).",
-          "min": 0.0
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "np_array"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "audio",
-        "n_mfcc",
-        "n_fft"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "Mel Spectrogram",
-      "description": "MelSpecNode computes the Mel-frequency spectrogram for an audio signal.\n    audio, analysis, spectrogram\n\n    Useful for:\n    - Audio feature extraction for machine learning\n    - Speech and music analysis tasks",
-      "namespace": "lib.audio.librosa.analysis",
-      "node_type": "lib.audio.librosa.analysis.MelSpectrogram",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "audio",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "Audio",
-          "description": "The audio file to convert to a tensor."
-        },
-        {
-          "name": "n_fft",
-          "type": {
-            "type": "int"
-          },
-          "default": 2048,
-          "title": "N Fft",
-          "description": "The number of samples per frame.",
-          "min": 0.0
-        },
-        {
-          "name": "hop_length",
-          "type": {
-            "type": "int"
-          },
-          "default": 512,
-          "title": "Hop Length",
-          "description": "The number of samples between frames.",
-          "min": 0.0
-        },
-        {
-          "name": "n_mels",
-          "type": {
-            "type": "int"
-          },
-          "default": 128,
-          "title": "N Mels",
-          "description": "The number of Mel bands to generate.",
-          "min": 0.0
-        },
-        {
-          "name": "fmin",
-          "type": {
-            "type": "int"
-          },
-          "default": 0,
-          "title": "Fmin",
-          "description": "The lowest frequency (in Hz).",
-          "min": 0.0
-        },
-        {
-          "name": "fmax",
-          "type": {
-            "type": "int"
-          },
-          "default": 8000,
-          "title": "Fmax",
-          "description": "The highest frequency (in Hz).",
-          "min": 0.0
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "np_array"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "audio",
-        "n_mels",
-        "fmax"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "Plot Spectrogram",
-      "description": "The PlotSpectrogram node generates a visual representation of the spectrum of frequencies in an audio signal as they vary with time.\n    audio, analysis, frequency, spectrogram\n\n    #### Applications\n    - Audio Analysis: Allows users to visually see the spectrum of frequencies in their data.\n    - Machine Learning: Used as a preprocessing step for feeding data into image-based ML models.\n    - Sound engineering: Helps in identifying specific tones or frequencies in a music piece or a sound bite.",
-      "namespace": "lib.audio.librosa.analysis",
-      "node_type": "lib.audio.librosa.analysis.PlotSpectrogram",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "tensor",
-          "type": {
-            "type": "np_array"
-          },
-          "default": {},
-          "title": "Tensor",
-          "description": "The tensor containing the mel spectrogram."
-        },
-        {
-          "name": "fmax",
-          "type": {
-            "type": "int"
-          },
-          "default": 8000,
-          "title": "Fmax",
-          "description": "The highest frequency (in Hz).",
-          "min": 0.0
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "image"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "tensor",
-        "fmax"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "Powert To DB",
-      "description": "Converts a power spectrogram to decibel (dB) scale.\n    audio, analysis, decibel, spectrogram",
-      "namespace": "lib.audio.librosa.analysis",
-      "node_type": "lib.audio.librosa.analysis.PowertToDB",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "tensor",
-          "type": {
-            "type": "np_array"
-          },
-          "default": {},
-          "title": "Tensor",
-          "description": "The tensor containing the power spectrogram."
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "np_array"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "tensor"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "STFT",
-      "description": "This node computes the Short-Time Fourier Transform (STFT) matrix for an audio signal. The STFT matrix represents the signal in both time and frequency domains, forming the foundation for many audio processing tasks.\n    audio, analysis, fourier, frequency, time\n    #### Applications\n    - Audio Analysis: By transforming the audio signal into a visualizable format, it helps in understanding and analyzing the audio signal.\n    - Sound Processing: It plays a key foundational role in sound effects, tuning, compression, and more.\n    - Audio Feature Extraction: It can be used to analyze frequency-based features for sound classification.\n    - Music Information Retrieval: It helps in music transcription, rhythm and tempo analysis.",
-      "namespace": "lib.audio.librosa.analysis",
-      "node_type": "lib.audio.librosa.analysis.STFT",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "audio",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "Audio",
-          "description": "The audio file to compute the STFT matrix from."
-        },
-        {
-          "name": "n_fft",
-          "type": {
-            "type": "int"
-          },
-          "default": 2048,
-          "title": "N Fft",
-          "description": "The number of samples per frame.",
-          "min": 0.0
-        },
-        {
-          "name": "hop_length",
-          "type": {
-            "type": "int"
-          },
-          "default": 512,
-          "title": "Hop Length",
-          "description": "The number of samples between frames.",
-          "min": 0.0
-        },
-        {
-          "name": "win_length",
-          "type": {
-            "type": "int",
-            "optional": true
-          },
-          "title": "Win Length",
-          "description": "The window length. If None, it defaults to n_fft."
-        },
-        {
-          "name": "window",
-          "type": {
-            "type": "str"
-          },
-          "default": "hann",
-          "title": "Window",
-          "description": "The type of window to use."
-        },
-        {
-          "name": "center",
-          "type": {
-            "type": "bool"
-          },
-          "default": true,
-          "title": "Center",
-          "description": "If True, input signal is padded so that frame D[:, t] is centered at y[t * hop_length]."
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "np_array"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "audio",
-        "n_fft",
-        "hop_length"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "Spectral Centroid",
-      "description": "Computes the spectral centroid of an audio file.\n    audio, analysis, spectral\n\n    The spectral centroid indicates where the \"center of mass\" of the spectrum is located.\n    Perceptually, it has a connection with the impression of \"brightness\" of a sound.\n\n    Use cases:\n    - Analyze the timbral characteristics of audio\n    - Track changes in sound brightness over time\n    - Feature extraction for music genre classification\n    - Audio effect design and sound manipulation",
-      "namespace": "lib.audio.librosa.analysis",
-      "node_type": "lib.audio.librosa.analysis.SpectralCentroid",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "audio",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "Audio",
-          "description": "The audio file to analyze."
-        },
-        {
-          "name": "n_fft",
-          "type": {
-            "type": "int"
-          },
-          "default": 2048,
-          "title": "N Fft",
-          "description": "The length of the FFT window.",
-          "min": 128.0,
-          "max": 8192.0
-        },
-        {
-          "name": "hop_length",
-          "type": {
-            "type": "int"
-          },
-          "default": 512,
-          "title": "Hop Length",
-          "description": "Number of samples between successive frames.",
-          "min": 64.0,
-          "max": 2048.0
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "np_array"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "audio",
-        "n_fft",
-        "hop_length"
-      ],
-      "is_dynamic": false
-    },
-    {
-      "title": "Spectral Contrast",
-      "description": "The spectral contrast measures the difference in amplitude between the most noticeable parts (peaks) and the less noticeable parts (valleys) in a sound spectrum.\n    audio, analysis, decibel, amplitude\n\n    #### Applications\n    - Music genre classification: distinguishing between different types of music based on the color of sound.\n    - Instrument recognition: recognizing different musical instruments by the difference in their spectral contrast.\n    - Audio analysis: determining various characteristics of audio files.\n\n    Useful note: The `n_fft` and `hop_length` parameters affect the resolution of the analysis. A higher `n_fft` provides better frequency resolution but worse time resolution, and vice versa for a lower `hop_length`.",
-      "namespace": "lib.audio.librosa.analysis",
-      "node_type": "lib.audio.librosa.analysis.SpectralContrast",
-      "layout": "default",
-      "properties": [
-        {
-          "name": "audio",
-          "type": {
-            "type": "audio"
-          },
-          "default": {},
-          "title": "Audio",
-          "description": "The audio file to extract spectral contrast from."
-        },
-        {
-          "name": "n_fft",
-          "type": {
-            "type": "int"
-          },
-          "default": 2048,
-          "title": "N Fft",
-          "description": "The number of samples per frame.",
-          "min": 0.0
-        },
-        {
-          "name": "hop_length",
-          "type": {
-            "type": "int"
-          },
-          "default": 512,
-          "title": "Hop Length",
-          "description": "The number of samples between frames.",
-          "min": 0.0
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "np_array"
-          },
-          "name": "output"
-        }
-      ],
-      "the_model_info": {},
-      "recommended_models": [],
-      "basic_fields": [
-        "audio",
-        "n_fft",
-        "hop_length"
-      ],
-      "is_dynamic": false
-    },
-    {
       "title": "Detect Onsets",
       "description": "Detect onsets in an audio file.\n    audio, analysis, segmentation\n\n    Use cases:\n    - Identify beat locations in music\n    - Segment audio based on changes in energy or spectral content\n    - Prepare audio for further processing or analysis",
-      "namespace": "lib.audio.librosa.segmentation",
-      "node_type": "lib.audio.librosa.segmentation.DetectOnsets",
+      "namespace": "lib.librosa.segmentation",
+      "node_type": "lib.librosa.segmentation.DetectOnsets",
       "layout": "default",
       "properties": [
         {
@@ -2918,8 +1392,8 @@
     {
       "title": "Save Audio Segments",
       "description": "Save a list of audio segments to a specified folder.\n    audio, save, export\n\n    Use cases:\n    - Export segmented audio files for further processing or analysis\n    - Create a dataset of audio clips from a longer recording\n    - Organize audio segments into a structured format",
-      "namespace": "lib.audio.librosa.segmentation",
-      "node_type": "lib.audio.librosa.segmentation.SaveAudioSegments",
+      "namespace": "lib.librosa.segmentation",
+      "node_type": "lib.librosa.segmentation.SaveAudioSegments",
       "layout": "default",
       "properties": [
         {
@@ -2975,8 +1449,8 @@
     {
       "title": "Segment Audio By Onsets",
       "description": "Segment an audio file based on detected onsets.\n    audio, segmentation, processing\n\n    Use cases:\n    - Split a long audio recording into individual segments\n    - Prepare audio clips for further analysis or processing\n    - Extract specific parts of an audio file based on onset locations",
-      "namespace": "lib.audio.librosa.segmentation",
-      "node_type": "lib.audio.librosa.segmentation.SegmentAudioByOnsets",
+      "namespace": "lib.librosa.segmentation",
+      "node_type": "lib.librosa.segmentation.SegmentAudioByOnsets",
       "layout": "default",
       "properties": [
         {
@@ -3028,6 +1502,23 @@
         "min_segment_length"
       ],
       "is_dynamic": false
+    }
+  ],
+  "assets": [
+    {
+      "package_name": "nodetool-lib-audio",
+      "name": "Segment Audio.jpg",
+      "path": ""
+    }
+  ],
+  "examples": [
+    {
+      "id": "fb81e4def50511efb8e900003278d4da",
+      "name": "Segment Audio",
+      "description": "This example demonstrates how to automatically segment an audio file based on detected onsets (sudden changes in audio intensity). The workflow first loads an audio file, then uses librosa's onset detection to identify points where new sounds begin. These onset points are used to slice the original audio into separate segments, which are then saved as individual files. This technique is useful for breaking down longer audio recordings into meaningful chunks for further processing, analysis, or organization. Common applications include splitting music into individual notes, separating speech into words or phrases, or isolating sound effects from a continuous recording.",
+      "tags": [
+        "audio"
+      ]
     }
   ]
 }

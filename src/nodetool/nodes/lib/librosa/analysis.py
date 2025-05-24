@@ -5,7 +5,7 @@ from nodetool.metadata.types import AudioRef, NPArray
 from nodetool.workflows.base_node import BaseNode
 from nodetool.metadata.types import NPArray
 from nodetool.workflows.processing_context import ProcessingContext
-from nodetool.nodes.lib.audio.audio_helpers import (
+from nodetool.common.audio_helpers import (
     convert_to_float,
 )
 from nodetool.metadata.types import ImageRef

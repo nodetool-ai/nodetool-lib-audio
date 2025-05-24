@@ -4,7 +4,7 @@ import numpy as np
 from nodetool.metadata.types import AudioRef, NPArray
 from nodetool.workflows.base_node import BaseNode
 from nodetool.workflows.processing_context import ProcessingContext
-from nodetool.nodes.lib.audio.audio_helpers import numpy_to_audio_segment
+from nodetool.common.audio_helpers import numpy_to_audio_segment
 
 
 class PitchEnvelopeCurve(Enum):
@@ -88,13 +88,13 @@ class Oscillator(BaseNode):
         phase = 2 * np.pi * self.frequency * np.cumsum(pitch_env) / self.sample_rate
 
         # Generate waveform
-        if self.waveform == OscillatorWaveform.SINE:
+        if self.waveform == self.OscillatorWaveform.SINE:
             samples = self.amplitude * np.sin(phase)
-        elif self.waveform == OscillatorWaveform.SQUARE:
+        elif self.waveform == self.OscillatorWaveform.SQUARE:
             samples = self.amplitude * np.sign(np.sin(phase))
-        elif self.waveform == OscillatorWaveform.SAWTOOTH:
+        elif self.waveform == self.OscillatorWaveform.SAWTOOTH:
             samples = self.amplitude * 2 * ((phase / (2 * np.pi)) % 1) - 1
-        elif self.waveform == OscillatorWaveform.TRIANGLE:
+        elif self.waveform == self.OscillatorWaveform.TRIANGLE:
             samples = self.amplitude * 2 * abs(2 * ((phase / (2 * np.pi)) % 1) - 1) - 1
         else:
             raise ValueError("Invalid waveform type")
