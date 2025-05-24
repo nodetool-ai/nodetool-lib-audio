@@ -105,6 +105,15 @@ In the NodeTool interface:
 - **pedalboard**: High-quality audio effects
 - **nodetool-core**: Core NodeTool functionality
 
+## Testing
+
+This project uses **pytest** for its test suite. To run the tests locally,
+install `pytest` and execute:
+
+```bash
+pytest
+```
+
 ## Contributing
 
 Contributions to Nodetool Audio Nodes are welcome! Please feel free to submit pull requests, create issues, or suggest new features.
