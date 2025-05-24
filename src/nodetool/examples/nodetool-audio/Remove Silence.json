@@ -15,7 +15,7 @@
       {
         "id": "1",
         "parent_id": null,
-        "type": "nodetool.audio.transform.RemoveSilence",
+        "type": "lib.audio.transform.RemoveSilence",
         "data": {
           "min_length": 200,
           "threshold": -40,
