@@ -3,7 +3,6 @@ import numpy as np
 from pydantic import Field
 from nodetool.metadata.types import AudioRef, NPArray
 from nodetool.workflows.base_node import BaseNode
-from nodetool.metadata.types import NPArray
 from nodetool.workflows.processing_context import ProcessingContext
 from nodetool.common.audio_helpers import (
     convert_to_float,
@@ -403,7 +402,6 @@ class SpectralCentroid(BaseNode):
 
     async def process(self, context: ProcessingContext) -> NPArray:
         import librosa
-        import numpy as np
 
         # Load the audio file
         samples, sample_rate, _ = await context.audio_to_numpy(self.audio)
