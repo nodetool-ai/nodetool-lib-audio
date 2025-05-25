@@ -4,7 +4,7 @@ from pydub import AudioSegment
 from nodetool.workflows.base_node import BaseNode
 from nodetool.workflows.processing_context import ProcessingContext
 from nodetool.metadata.types import AudioRef
-from nodetool.nodes.lib.audio.pedalboard import (
+from nodetool.nodes.lib.pedalboard import (
     Reverb,
     Compress,
     TimeStretch,
