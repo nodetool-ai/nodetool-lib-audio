@@ -1348,6 +1348,682 @@
       "is_dynamic": false
     },
     {
+      "title": "Amplitude To DB",
+      "description": "Converts an amplitude spectrogram to a dB-scaled spectrogram.\n    audio, analysis, spectrogram\n\n    This node is useful for:\n    - Compressing the dynamic range of spectrograms for visualization\n    - Preparing input for audio models that expect dB-scaled data",
+      "namespace": "lib.librosa.analysis",
+      "node_type": "lib.librosa.analysis.AmplitudeToDB",
+      "layout": "default",
+      "properties": [
+        {
+          "name": "tensor",
+          "type": {
+            "type": "np_array"
+          },
+          "default": {},
+          "title": "Tensor",
+          "description": "The amplitude tensor to be converted to dB scale."
+        }
+      ],
+      "outputs": [
+        {
+          "type": {
+            "type": "np_array"
+          },
+          "name": "output"
+        }
+      ],
+      "the_model_info": {},
+      "recommended_models": [],
+      "basic_fields": [
+        "tensor"
+      ],
+      "is_dynamic": false
+    },
+    {
+      "title": "Chroma STFT",
+      "description": "This node creates a chromagram from a waveform or power spectrogram to identify different pitch classes in an audio signal.\n    audio, analysis, chromagram, pitch\n\n    Applications:\n    - Chord recognition in music\n    - Music genre classification based on pitch content",
+      "namespace": "lib.librosa.analysis",
+      "node_type": "lib.librosa.analysis.ChromaSTFT",
+      "layout": "default",
+      "properties": [
+        {
+          "name": "audio",
+          "type": {
+            "type": "audio"
+          },
+          "default": {},
+          "title": "Audio",
+          "description": "The audio file to extract chromagram from."
+        },
+        {
+          "name": "n_fft",
+          "type": {
+            "type": "int"
+          },
+          "default": 2048,
+          "title": "N Fft",
+          "description": "The number of samples per frame.",
+          "min": 0.0
+        },
+        {
+          "name": "hop_length",
+          "type": {
+            "type": "int"
+          },
+          "default": 512,
+          "title": "Hop Length",
+          "description": "The number of samples between frames.",
+          "min": 0.0
+        }
+      ],
+      "outputs": [
+        {
+          "type": {
+            "type": "np_array"
+          },
+          "name": "output"
+        }
+      ],
+      "the_model_info": {},
+      "recommended_models": [],
+      "basic_fields": [
+        "audio",
+        "n_fft",
+        "hop_length"
+      ],
+      "is_dynamic": false
+    },
+    {
+      "title": "DBTo Amplitude",
+      "description": "The DBToAmplitude node Converts a dB-scaled spectrogram to an amplitude spectrogram.\n    audio, analysis, spectrogram\n    Useful for:\n    - Reversing dB scaling before audio synthesis\n    - Preparing data for models that expect linear amplitude scaling",
+      "namespace": "lib.librosa.analysis",
+      "node_type": "lib.librosa.analysis.DBToAmplitude",
+      "layout": "default",
+      "properties": [
+        {
+          "name": "tensor",
+          "type": {
+            "type": "np_array"
+          },
+          "default": {},
+          "title": "Tensor",
+          "description": "The dB-scaled tensor to be converted to amplitude scale."
+        }
+      ],
+      "outputs": [
+        {
+          "type": {
+            "type": "np_array"
+          },
+          "name": "output"
+        }
+      ],
+      "the_model_info": {},
+      "recommended_models": [],
+      "basic_fields": [
+        "tensor"
+      ],
+      "is_dynamic": false
+    },
+    {
+      "title": "DBTo Power",
+      "description": "This node converts a decibel (dB) spectrogram back to power scale.\n    audio, analysis, spectrogram\n\n    Useful for:\n    - Reversing dB scaling for audio synthesis\n    - Preparing data for models that expect power-scaled data",
+      "namespace": "lib.librosa.analysis",
+      "node_type": "lib.librosa.analysis.DBToPower",
+      "layout": "default",
+      "properties": [
+        {
+          "name": "tensor",
+          "type": {
+            "type": "np_array"
+          },
+          "default": {},
+          "title": "Tensor",
+          "description": "The tensor containing the decibel spectrogram."
+        }
+      ],
+      "outputs": [
+        {
+          "type": {
+            "type": "np_array"
+          },
+          "name": "output"
+        }
+      ],
+      "the_model_info": {},
+      "recommended_models": [],
+      "basic_fields": [
+        "tensor"
+      ],
+      "is_dynamic": false
+    },
+    {
+      "title": "Griffin Lim",
+      "description": "GriffinLim Node performs phase reconstruction on a magnitude spectrogram utilizing the Griffin-Lim algorithm.\n    audio, synthesis, phase reconstruction\n\n    Applications:\n    - Audio synthesis from spectrograms\n    - Phase reconstruction in audio processing pipelines",
+      "namespace": "lib.librosa.analysis",
+      "node_type": "lib.librosa.analysis.GriffinLim",
+      "layout": "default",
+      "properties": [
+        {
+          "name": "magnitude_spectrogram",
+          "type": {
+            "type": "np_array"
+          },
+          "default": {},
+          "title": "Magnitude Spectrogram",
+          "description": "Magnitude spectrogram input for phase reconstruction."
+        },
+        {
+          "name": "n_iter",
+          "type": {
+            "type": "int"
+          },
+          "default": 32,
+          "title": "N Iter",
+          "description": "Number of iterations for the Griffin-Lim algorithm."
+        },
+        {
+          "name": "hop_length",
+          "type": {
+            "type": "int"
+          },
+          "default": 512,
+          "title": "Hop Length",
+          "description": "Number of samples between successive frames."
+        },
+        {
+          "name": "win_length",
+          "type": {
+            "type": "int",
+            "optional": true
+          },
+          "title": "Win Length",
+          "description": "Each frame of audio is windowed by `window()`. The window will be of length `win_length` and then padded with zeros to match `n_fft`."
+        },
+        {
+          "name": "window",
+          "type": {
+            "type": "str"
+          },
+          "default": "hann",
+          "title": "Window",
+          "description": "Type of window to use for Griffin-Lim transformation."
+        },
+        {
+          "name": "center",
+          "type": {
+            "type": "bool"
+          },
+          "default": true,
+          "title": "Center",
+          "description": "If True, the signal `y` is padded so that frame `D[:, t]` is centered at `y[t * hop_length]`."
+        },
+        {
+          "name": "length",
+          "type": {
+            "type": "int",
+            "optional": true
+          },
+          "title": "Length",
+          "description": "If given, the resulting signal will be zero-padded or clipped to this length."
+        }
+      ],
+      "outputs": [
+        {
+          "type": {
+            "type": "np_array"
+          },
+          "name": "output"
+        }
+      ],
+      "the_model_info": {},
+      "recommended_models": [],
+      "basic_fields": [
+        "magnitude_spectrogram",
+        "n_iter",
+        "hop_length",
+        "win_length",
+        "window",
+        "center",
+        "length"
+      ],
+      "is_dynamic": false
+    },
+    {
+      "title": "MFCC",
+      "description": "MFCC Node computes the Mel-frequency cepstral coefficients (MFCCs) from an audio signal.\n    audio, analysis, frequency, MFCC, MEL",
+      "namespace": "lib.librosa.analysis",
+      "node_type": "lib.librosa.analysis.MFCC",
+      "layout": "default",
+      "properties": [
+        {
+          "name": "audio",
+          "type": {
+            "type": "audio"
+          },
+          "default": {},
+          "title": "Audio",
+          "description": "The audio file to extract MFCCs from."
+        },
+        {
+          "name": "n_mfcc",
+          "type": {
+            "type": "int"
+          },
+          "default": 13,
+          "title": "N Mfcc",
+          "description": "The number of MFCCs to extract.",
+          "min": 0.0
+        },
+        {
+          "name": "n_fft",
+          "type": {
+            "type": "int"
+          },
+          "default": 2048,
+          "title": "N Fft",
+          "description": "The number of samples per frame.",
+          "min": 0.0
+        },
+        {
+          "name": "hop_length",
+          "type": {
+            "type": "int"
+          },
+          "default": 512,
+          "title": "Hop Length",
+          "description": "The number of samples between frames.",
+          "min": 0.0
+        },
+        {
+          "name": "fmin",
+          "type": {
+            "type": "int"
+          },
+          "default": 0,
+          "title": "Fmin",
+          "description": "The lowest frequency (in Hz).",
+          "min": 0.0
+        },
+        {
+          "name": "fmax",
+          "type": {
+            "type": "int"
+          },
+          "default": 8000,
+          "title": "Fmax",
+          "description": "The highest frequency (in Hz).",
+          "min": 0.0
+        }
+      ],
+      "outputs": [
+        {
+          "type": {
+            "type": "np_array"
+          },
+          "name": "output"
+        }
+      ],
+      "the_model_info": {},
+      "recommended_models": [],
+      "basic_fields": [
+        "audio",
+        "n_mfcc",
+        "n_fft"
+      ],
+      "is_dynamic": false
+    },
+    {
+      "title": "Mel Spectrogram",
+      "description": "MelSpecNode computes the Mel-frequency spectrogram for an audio signal.\n    audio, analysis, spectrogram\n\n    Useful for:\n    - Audio feature extraction for machine learning\n    - Speech and music analysis tasks",
+      "namespace": "lib.librosa.analysis",
+      "node_type": "lib.librosa.analysis.MelSpectrogram",
+      "layout": "default",
+      "properties": [
+        {
+          "name": "audio",
+          "type": {
+            "type": "audio"
+          },
+          "default": {},
+          "title": "Audio",
+          "description": "The audio file to convert to a tensor."
+        },
+        {
+          "name": "n_fft",
+          "type": {
+            "type": "int"
+          },
+          "default": 2048,
+          "title": "N Fft",
+          "description": "The number of samples per frame.",
+          "min": 0.0
+        },
+        {
+          "name": "hop_length",
+          "type": {
+            "type": "int"
+          },
+          "default": 512,
+          "title": "Hop Length",
+          "description": "The number of samples between frames.",
+          "min": 0.0
+        },
+        {
+          "name": "n_mels",
+          "type": {
+            "type": "int"
+          },
+          "default": 128,
+          "title": "N Mels",
+          "description": "The number of Mel bands to generate.",
+          "min": 0.0
+        },
+        {
+          "name": "fmin",
+          "type": {
+            "type": "int"
+          },
+          "default": 0,
+          "title": "Fmin",
+          "description": "The lowest frequency (in Hz).",
+          "min": 0.0
+        },
+        {
+          "name": "fmax",
+          "type": {
+            "type": "int"
+          },
+          "default": 8000,
+          "title": "Fmax",
+          "description": "The highest frequency (in Hz).",
+          "min": 0.0
+        }
+      ],
+      "outputs": [
+        {
+          "type": {
+            "type": "np_array"
+          },
+          "name": "output"
+        }
+      ],
+      "the_model_info": {},
+      "recommended_models": [],
+      "basic_fields": [
+        "audio",
+        "n_mels",
+        "fmax"
+      ],
+      "is_dynamic": false
+    },
+    {
+      "title": "Plot Spectrogram",
+      "description": "The PlotSpectrogram node generates a visual representation of the spectrum of frequencies in an audio signal as they vary with time.\n    audio, analysis, frequency, spectrogram\n\n    #### Applications\n    - Audio Analysis: Allows users to visually see the spectrum of frequencies in their data.\n    - Machine Learning: Used as a preprocessing step for feeding data into image-based ML models.\n    - Sound engineering: Helps in identifying specific tones or frequencies in a music piece or a sound bite.",
+      "namespace": "lib.librosa.analysis",
+      "node_type": "lib.librosa.analysis.PlotSpectrogram",
+      "layout": "default",
+      "properties": [
+        {
+          "name": "tensor",
+          "type": {
+            "type": "np_array"
+          },
+          "default": {},
+          "title": "Tensor",
+          "description": "The tensor containing the mel spectrogram."
+        },
+        {
+          "name": "fmax",
+          "type": {
+            "type": "int"
+          },
+          "default": 8000,
+          "title": "Fmax",
+          "description": "The highest frequency (in Hz).",
+          "min": 0.0
+        }
+      ],
+      "outputs": [
+        {
+          "type": {
+            "type": "image"
+          },
+          "name": "output"
+        }
+      ],
+      "the_model_info": {},
+      "recommended_models": [],
+      "basic_fields": [
+        "tensor",
+        "fmax"
+      ],
+      "is_dynamic": false
+    },
+    {
+      "title": "Powert To DB",
+      "description": "Converts a power spectrogram to decibel (dB) scale.\n    audio, analysis, decibel, spectrogram",
+      "namespace": "lib.librosa.analysis",
+      "node_type": "lib.librosa.analysis.PowertToDB",
+      "layout": "default",
+      "properties": [
+        {
+          "name": "tensor",
+          "type": {
+            "type": "np_array"
+          },
+          "default": {},
+          "title": "Tensor",
+          "description": "The tensor containing the power spectrogram."
+        }
+      ],
+      "outputs": [
+        {
+          "type": {
+            "type": "np_array"
+          },
+          "name": "output"
+        }
+      ],
+      "the_model_info": {},
+      "recommended_models": [],
+      "basic_fields": [
+        "tensor"
+      ],
+      "is_dynamic": false
+    },
+    {
+      "title": "STFT",
+      "description": "This node computes the Short-Time Fourier Transform (STFT) matrix for an audio signal. The STFT matrix represents the signal in both time and frequency domains, forming the foundation for many audio processing tasks.\n    audio, analysis, fourier, frequency, time\n    #### Applications\n    - Audio Analysis: By transforming the audio signal into a visualizable format, it helps in understanding and analyzing the audio signal.\n    - Sound Processing: It plays a key foundational role in sound effects, tuning, compression, and more.\n    - Audio Feature Extraction: It can be used to analyze frequency-based features for sound classification.\n    - Music Information Retrieval: It helps in music transcription, rhythm and tempo analysis.",
+      "namespace": "lib.librosa.analysis",
+      "node_type": "lib.librosa.analysis.STFT",
+      "layout": "default",
+      "properties": [
+        {
+          "name": "audio",
+          "type": {
+            "type": "audio"
+          },
+          "default": {},
+          "title": "Audio",
+          "description": "The audio file to compute the STFT matrix from."
+        },
+        {
+          "name": "n_fft",
+          "type": {
+            "type": "int"
+          },
+          "default": 2048,
+          "title": "N Fft",
+          "description": "The number of samples per frame.",
+          "min": 0.0
+        },
+        {
+          "name": "hop_length",
+          "type": {
+            "type": "int"
+          },
+          "default": 512,
+          "title": "Hop Length",
+          "description": "The number of samples between frames.",
+          "min": 0.0
+        },
+        {
+          "name": "win_length",
+          "type": {
+            "type": "int",
+            "optional": true
+          },
+          "title": "Win Length",
+          "description": "The window length. If None, it defaults to n_fft."
+        },
+        {
+          "name": "window",
+          "type": {
+            "type": "str"
+          },
+          "default": "hann",
+          "title": "Window",
+          "description": "The type of window to use."
+        },
+        {
+          "name": "center",
+          "type": {
+            "type": "bool"
+          },
+          "default": true,
+          "title": "Center",
+          "description": "If True, input signal is padded so that frame D[:, t] is centered at y[t * hop_length]."
+        }
+      ],
+      "outputs": [
+        {
+          "type": {
+            "type": "np_array"
+          },
+          "name": "output"
+        }
+      ],
+      "the_model_info": {},
+      "recommended_models": [],
+      "basic_fields": [
+        "audio",
+        "n_fft",
+        "hop_length"
+      ],
+      "is_dynamic": false
+    },
+    {
+      "title": "Spectral Centroid",
+      "description": "Computes the spectral centroid of an audio file.\n    audio, analysis, spectral\n\n    The spectral centroid indicates where the \"center of mass\" of the spectrum is located.\n    Perceptually, it has a connection with the impression of \"brightness\" of a sound.\n\n    Use cases:\n    - Analyze the timbral characteristics of audio\n    - Track changes in sound brightness over time\n    - Feature extraction for music genre classification\n    - Audio effect design and sound manipulation",
+      "namespace": "lib.librosa.analysis",
+      "node_type": "lib.librosa.analysis.SpectralCentroid",
+      "layout": "default",
+      "properties": [
+        {
+          "name": "audio",
+          "type": {
+            "type": "audio"
+          },
+          "default": {},
+          "title": "Audio",
+          "description": "The audio file to analyze."
+        },
+        {
+          "name": "n_fft",
+          "type": {
+            "type": "int"
+          },
+          "default": 2048,
+          "title": "N Fft",
+          "description": "The length of the FFT window.",
+          "min": 128.0,
+          "max": 8192.0
+        },
+        {
+          "name": "hop_length",
+          "type": {
+            "type": "int"
+          },
+          "default": 512,
+          "title": "Hop Length",
+          "description": "Number of samples between successive frames.",
+          "min": 64.0,
+          "max": 2048.0
+        }
+      ],
+      "outputs": [
+        {
+          "type": {
+            "type": "np_array"
+          },
+          "name": "output"
+        }
+      ],
+      "the_model_info": {},
+      "recommended_models": [],
+      "basic_fields": [
+        "audio",
+        "n_fft",
+        "hop_length"
+      ],
+      "is_dynamic": false
+    },
+    {
+      "title": "Spectral Contrast",
+      "description": "The spectral contrast measures the difference in amplitude between the most noticeable parts (peaks) and the less noticeable parts (valleys) in a sound spectrum.\n    audio, analysis, decibel, amplitude\n\n    #### Applications\n    - Music genre classification: distinguishing between different types of music based on the color of sound.\n    - Instrument recognition: recognizing different musical instruments by the difference in their spectral contrast.\n    - Audio analysis: determining various characteristics of audio files.\n\n    Useful note: The `n_fft` and `hop_length` parameters affect the resolution of the analysis. A higher `n_fft` provides better frequency resolution but worse time resolution, and vice versa for a lower `hop_length`.",
+      "namespace": "lib.librosa.analysis",
+      "node_type": "lib.librosa.analysis.SpectralContrast",
+      "layout": "default",
+      "properties": [
+        {
+          "name": "audio",
+          "type": {
+            "type": "audio"
+          },
+          "default": {},
+          "title": "Audio",
+          "description": "The audio file to extract spectral contrast from."
+        },
+        {
+          "name": "n_fft",
+          "type": {
+            "type": "int"
+          },
+          "default": 2048,
+          "title": "N Fft",
+          "description": "The number of samples per frame.",
+          "min": 0.0
+        },
+        {
+          "name": "hop_length",
+          "type": {
+            "type": "int"
+          },
+          "default": 512,
+          "title": "Hop Length",
+          "description": "The number of samples between frames.",
+          "min": 0.0
+        }
+      ],
+      "outputs": [
+        {
+          "type": {
+            "type": "np_array"
+          },
+          "name": "output"
+        }
+      ],
+      "the_model_info": {},
+      "recommended_models": [],
+      "basic_fields": [
+        "audio",
+        "n_fft",
+        "hop_length"
+      ],
+      "is_dynamic": false
+    },
+    {
       "title": "Detect Onsets",
       "description": "Detect onsets in an audio file.\n    audio, analysis, segmentation\n\n    Use cases:\n    - Identify beat locations in music\n    - Segment audio based on changes in energy or spectral content\n    - Prepare audio for further processing or analysis",
       "namespace": "lib.librosa.segmentation",

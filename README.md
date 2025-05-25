@@ -135,7 +135,7 @@ into smaller clips automatically.
 Run the unit tests with [pytest](https://docs.pytest.org/):
 
 ```bash
-pytest -v
+pytest -q
 ```
 
 ## Contributing

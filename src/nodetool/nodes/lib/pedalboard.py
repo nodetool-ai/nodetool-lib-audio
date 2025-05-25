@@ -1,10 +1,5 @@
-import io
-from typing import IO
 import numpy as np
 from pydantic import Field
-import pydub
-from pydub import AudioSegment
-from pedalboard.io import AudioFile
 from nodetool.metadata.types import AudioRef
 from nodetool.workflows.base_node import BaseNode
 from nodetool.workflows.processing_context import ProcessingContext
@@ -138,8 +133,6 @@ class TimeStretch(BaseNode):
 
     async def process(self, context: ProcessingContext) -> AudioRef:
         import librosa
-        import soundfile as sf
-        import io
 
         samples, sample_rate, num_channels = await context.audio_to_numpy(self.audio)
 

@@ -3,11 +3,10 @@ import numpy as np
 from io import BytesIO
 from pydub import AudioSegment
 from nodetool.workflows.processing_context import ProcessingContext
-from nodetool.metadata.types import AudioRef, NPArray, FolderRef
-from nodetool.nodes.lib.audio.librosa.segmentation import (
+from nodetool.metadata.types import AudioRef, NPArray
+from nodetool.nodes.lib.librosa.segmentation import (
     DetectOnsets,
     SegmentAudioByOnsets,
-    SaveAudioSegments,
 )
 
 # Create a dummy AudioRef for testing
