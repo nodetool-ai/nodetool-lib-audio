@@ -1,6 +1,5 @@
-from pydantic import BaseModel, Field
+from pydantic import Field
 import typing
-from typing import Any
 import nodetool.metadata.types
 import nodetool.metadata.types as types
 from nodetool.dsl.graph import GraphNode
@@ -72,10 +71,6 @@ class FM_Synthesis(GraphNode):
     @classmethod
     def get_node_type(cls):
         return "lib.synthesis.FM_Synthesis"
-
-
-import nodetool.nodes.lib.synthesis
-import nodetool.nodes.lib.synthesis
 
 
 class Oscillator(GraphNode):

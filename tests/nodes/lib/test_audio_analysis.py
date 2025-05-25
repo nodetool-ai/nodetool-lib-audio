@@ -1,4 +1,4 @@
-from io import BytesIO
+import tempfile
 import pytest
 import numpy as np
 from pydub import AudioSegment
@@ -21,9 +21,10 @@ from nodetool.nodes.lib.librosa.analysis import (
 
 
 dummy_tensor = NPArray.from_numpy(np.random.rand(100, 100))
-buffer = BytesIO()
-AudioSegment.silent(5000, 44_100).export(buffer, format="mp3")
-dummy_audio = AudioRef(data=buffer.getvalue())
+tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".wav")
+AudioSegment.silent(5000, 44_100).export(tmp.name, format="wav")
+tmp.close()
+dummy_audio = AudioRef(uri=tmp.name)
 
 
 @pytest.fixture

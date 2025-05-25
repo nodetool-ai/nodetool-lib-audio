@@ -1,5 +1,5 @@
 import pytest
-from io import BytesIO
+import tempfile
 from pydub import AudioSegment
 from nodetool.workflows.base_node import BaseNode
 from nodetool.workflows.processing_context import ProcessingContext
@@ -24,9 +24,10 @@ from nodetool.nodes.lib.pedalboard import (
 )
 
 # Create a dummy AudioRef for testing
-buffer = BytesIO()
-AudioSegment.silent(duration=5000, frame_rate=44100).export(buffer, format="mp3")
-dummy_audio = AudioRef(data=buffer.getvalue())
+tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".wav")
+AudioSegment.silent(duration=5000, frame_rate=44100).export(tmp.name, format="wav")
+tmp.close()
+dummy_audio = AudioRef(uri=tmp.name)
 
 
 @pytest.fixture

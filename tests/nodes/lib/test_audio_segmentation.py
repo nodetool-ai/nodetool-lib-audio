@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-from io import BytesIO
+import tempfile
 from pydub import AudioSegment
 from nodetool.workflows.processing_context import ProcessingContext
 from nodetool.metadata.types import AudioRef, NPArray
@@ -10,9 +10,10 @@ from nodetool.nodes.lib.librosa.segmentation import (
 )
 
 # Create a dummy AudioRef for testing
-buffer = BytesIO()
-AudioSegment.silent(duration=5000, frame_rate=44100).export(buffer, format="wav")
-dummy_audio = AudioRef(data=buffer.getvalue())
+tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".wav")
+AudioSegment.silent(duration=5000, frame_rate=44100).export(tmp.name, format="wav")
+tmp.close()
+dummy_audio = AudioRef(uri=tmp.name)
 
 # Create a dummy Tensor for onsets
 dummy_onsets = NPArray.from_numpy(np.array([0.5, 1.0, 1.5, 2.0]))
