@@ -1,6 +1,6 @@
 # Nodetool Audio Nodes
 
-A comprehensive audio processing library for the NodeTool platform, providing a wide range of audio manipulation, synthesis, and effects nodes.
+A comprehensive audio processing library for the [NodeTool](https://github.com/nodetool-ai/nodetool) platform, providing a wide range of audio manipulation, synthesis, effects, and analysis nodes. The package builds on top of [nodetool-core](https://github.com/nodetool-ai/nodetool-core), which supplies the runtime and base node implementation used throughout this repository.
 
 ## Overview
 
@@ -52,6 +52,10 @@ In the NodeTool interface:
 3. Add effect nodes (e.g., reverb, delay)
 4. Connect to an output node (e.g., save to file or playback)
 
+Additional workflows can be found in the `examples` directory. The included
+`Segment Audio.json` demonstrates how to detect onsets and split an audio file
+into smaller clips automatically.
+
 ## Node Documentation
 
 ### Transformation Nodes
@@ -98,6 +102,27 @@ In the NodeTool interface:
 - **Limiter**: Prevents audio clipping
 - **Bitcrush**: Creates lo-fi or retro-style audio effects
 
+### Analysis Nodes
+
+- **AmplitudeToDB**: Converts an amplitude spectrogram to decibels
+- **ChromaSTFT**: Generates a chromagram to identify pitch classes
+- **DBToAmplitude**: Converts a dB-scaled spectrogram back to amplitude
+- **DBToPower**: Converts a dB-scaled spectrogram back to power scale
+- **GriffinLim**: Reconstructs audio from a magnitude spectrogram
+- **MelSpectrogram**: Computes the mel-frequency spectrogram
+- **MFCC**: Calculates Mel-frequency cepstral coefficients
+- **PlotSpectrogram**: Renders a spectrogram image
+- **PowertToDB**: Converts a power spectrogram to decibels
+- **SpectralContrast**: Measures spectral peaks and valleys
+- **STFT**: Computes a short-time Fourier transform
+- **SpectralCentroid**: Calculates the spectral centroid over time
+
+### Segmentation Nodes
+
+- **DetectOnsets**: Detects onset events in an audio signal
+- **SegmentAudioByOnsets**: Splits audio using detected onset times
+- **SaveAudioSegments**: Saves segments to a folder
+
 ## Dependencies
 
 - **pydub**: Audio file manipulation
@@ -107,11 +132,10 @@ In the NodeTool interface:
 
 ## Testing
 
-This project uses **pytest** for its test suite. To run the tests locally,
-install `pytest` and execute:
+Run the unit tests with [pytest](https://docs.pytest.org/):
 
 ```bash
-pytest
+pytest -q
 ```
 
 ## Contributing
