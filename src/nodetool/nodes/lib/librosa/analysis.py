@@ -4,7 +4,7 @@ from pydantic import Field
 from nodetool.metadata.types import AudioRef, NPArray
 from nodetool.workflows.base_node import BaseNode
 from nodetool.workflows.processing_context import ProcessingContext
-from nodetool.common.audio_helpers import (
+from nodetool.media.audio.audio_helpers import (
     convert_to_float,
 )
 from nodetool.metadata.types import ImageRef

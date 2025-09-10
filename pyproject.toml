@@ -1,29 +1,45 @@
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.poetry]
+[project]
 name = "nodetool-lib-audio"
 version = "0.6.0"
 description = "Nodetool Audio nodes"
 readme = "README.md"
-authors = ["Matthias Georgi <matti.georgi@gmail.com>"]
-packages = [{ include = "nodetool", from = "src" }]
-package-mode = true
-include = [
+authors = [
+    {name = "Matthias Georgi", email = "matti.georgi@gmail.com"}
+]
+requires-python = ">=3.11"
+
+dependencies = [
+    "nodetool-core>=0.6.0,<0.7.0",
+    # Media dependencies
+    "pydub==0.25.1",
+    "librosa==0.10.2",
+    "pedalboard==0.9.16",
+]
+
+
+[project.optional-dependencies]
+# For development with local nodetool-core
+dev = [
+    "nodetool-core @ file:///../nodetool-core",
+]
+# For exact version pinning in production
+stable = [
+    "nodetool-core==0.6.0",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/nodetool"]
+artifacts = [
     "src/nodetool/package_metadata/nodetool-lib-audio.json",
     "src/nodetool/assets/nodetool-lib-audio/Segment Audio.jpg",
 ]
-repository = "https://github.com/nodetool-ai/nodetool-lib-audio"
-
-[tool.poetry.dependencies]
-python = "^3.11"
-nodetool-core = { git = "https://github.com/nodetool-ai/nodetool-core.git", rev = "main" }
-
-# Media dependencies
-pydub = "0.25.1"
-librosa = "0.10.2"
-pedalboard = "0.9.16"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
