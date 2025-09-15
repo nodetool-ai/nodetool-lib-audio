@@ -25,7 +25,7 @@ jobs:
 
       - name: Install project and dev requirements
         run: uv pip install -e . --system
-          if [ -f requirements-dev.txt ]; then uv pip install -r requirements-dev.txt --system; fi
+          uv pip install -r requirements-dev.txt --system
 
       - name: Run tests
         run: pytest
