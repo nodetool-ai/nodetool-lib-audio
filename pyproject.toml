@@ -30,6 +30,8 @@ packages = ["src/nodetool"]
 artifacts = [
     "src/nodetool/package_metadata/nodetool-lib-audio.json",
     "src/nodetool/assets/nodetool-lib-audio/Segment Audio.jpg",
+    "package_metadata/nodetool-lib-audio.json",
+    "assets/nodetool-lib-audio/Segment Audio.jpg",
 ]
 
 [tool.pytest.ini_options]
