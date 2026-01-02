@@ -1,7 +1,7 @@
 {
   "name": "nodetool-lib-audio",
   "description": "Nodetool Audio nodes",
-  "version": "0.6.2-rc.17",
+  "version": "0.6.2-rc.18",
   "authors": [
     "Matthias Georgi <matti.georgi@gmail.com>"
   ],
