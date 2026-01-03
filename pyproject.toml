@@ -14,7 +14,7 @@ dependencies = [
     "nodetool-core==0.6.2-rc.18",
     # Media dependencies
     "pydub==0.25.1",
-    "librosa==0.10.2",
+    "librosa>=0.10.2",
     "pedalboard==0.9.16",
 ]
 
@@ -36,3 +36,6 @@ artifacts = [
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.uv.sources]
+nodetool-core = { git = "https://github.com/nodetool-ai/nodetool-core.git", rev = "main" }

@@ -121,4 +121,8 @@ poetry.lock
 
 # OS specific files
 .DS_Store
-Thumbs.db 
+Thumbs.db
+
+# Conda environment (copilot setup)
+conda_env/
+conda_env.tgz
