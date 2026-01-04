@@ -4009,7 +4009,7 @@ dependencies = [
 
 [[package]]
 name = "nodetool-lib-audio"
-version = "0.6.2rc18"
+version = "0.6.2rc19"
 source = { editable = "." }
 dependencies = [
     { name = "librosa" },
