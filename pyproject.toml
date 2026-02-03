@@ -41,11 +41,9 @@ dev = [
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/nodetool"]
-artifacts = [
-    "src/nodetool/package_metadata/nodetool-lib-audio.json",
-    "src/nodetool/assets/nodetool-lib-audio/Segment Audio.jpg",
-    "package_metadata/nodetool-lib-audio.json",
-    "assets/nodetool-lib-audio/Segment Audio.jpg",
+include = [
+    "src/nodetool/package_metadata/*.json",
+    "src/nodetool/assets/**/*.jpg",
 ]
 
 [tool.pytest.ini_options]
