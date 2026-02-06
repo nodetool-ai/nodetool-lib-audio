@@ -15,6 +15,7 @@ dependencies = [
     # Media dependencies
     "pydub==0.25.1",
     "librosa>=0.10.2",
+    "numba>=0.62.1",
     "pedalboard==0.9.16",
 ]
 
