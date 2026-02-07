@@ -18,18 +18,22 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.librosa.analysis
 from nodetool.workflows.base_node import BaseNode
 
+
 class AmplitudeToDB(SingleOutputGraphNode[types.NPArray], GraphNode[types.NPArray]):
     """
 
-        Converts an amplitude spectrogram to a dB-scaled spectrogram.
-        audio, analysis, spectrogram
+    Converts an amplitude spectrogram to a dB-scaled spectrogram.
+    audio, analysis, spectrogram
 
-        This node is useful for:
-        - Compressing the dynamic range of spectrograms for visualization
-        - Preparing input for audio models that expect dB-scaled data
+    This node is useful for:
+    - Compressing the dynamic range of spectrograms for visualization
+    - Preparing input for audio models that expect dB-scaled data
     """
 
-    tensor: types.NPArray | OutputHandle[types.NPArray] = connect_field(default=types.NPArray(type='np_array', value=None, dtype='<i8', shape=(1,)), description='The amplitude tensor to be converted to dB scale.')
+    tensor: types.NPArray | OutputHandle[types.NPArray] = connect_field(
+        default=types.NPArray(type="np_array", value=None, dtype="<i8", shape=(1,)),
+        description="The amplitude tensor to be converted to dB scale.",
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -46,20 +50,30 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.librosa.analysis
 from nodetool.workflows.base_node import BaseNode
 
+
 class ChromaSTFT(SingleOutputGraphNode[types.NPArray], GraphNode[types.NPArray]):
     """
 
-        This node creates a chromagram from a waveform or power spectrogram to identify different pitch classes in an audio signal.
-        audio, analysis, chromagram, pitch
+    This node creates a chromagram from a waveform or power spectrogram to identify different pitch classes in an audio signal.
+    audio, analysis, chromagram, pitch
 
-        Applications:
-        - Chord recognition in music
-        - Music genre classification based on pitch content
+    Applications:
+    - Chord recognition in music
+    - Music genre classification based on pitch content
     """
 
-    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(default=types.AudioRef(type='audio', uri='', asset_id=None, data=None, metadata=None), description='The audio file to extract chromagram from.')
-    n_fft: int | OutputHandle[int] = connect_field(default=2048, description='The number of samples per frame.')
-    hop_length: int | OutputHandle[int] = connect_field(default=512, description='The number of samples between frames.')
+    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(
+        default=types.AudioRef(
+            type="audio", uri="", asset_id=None, data=None, metadata=None
+        ),
+        description="The audio file to extract chromagram from.",
+    )
+    n_fft: int | OutputHandle[int] = connect_field(
+        default=2048, description="The number of samples per frame."
+    )
+    hop_length: int | OutputHandle[int] = connect_field(
+        default=512, description="The number of samples between frames."
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -76,17 +90,21 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.librosa.analysis
 from nodetool.workflows.base_node import BaseNode
 
+
 class DBToAmplitude(SingleOutputGraphNode[types.NPArray], GraphNode[types.NPArray]):
     """
 
-        The DBToAmplitude node Converts a dB-scaled spectrogram to an amplitude spectrogram.
-        audio, analysis, spectrogram
-        Useful for:
-        - Reversing dB scaling before audio synthesis
-        - Preparing data for models that expect linear amplitude scaling
+    The DBToAmplitude node Converts a dB-scaled spectrogram to an amplitude spectrogram.
+    audio, analysis, spectrogram
+    Useful for:
+    - Reversing dB scaling before audio synthesis
+    - Preparing data for models that expect linear amplitude scaling
     """
 
-    tensor: types.NPArray | OutputHandle[types.NPArray] = connect_field(default=types.NPArray(type='np_array', value=None, dtype='<i8', shape=(1,)), description='The dB-scaled tensor to be converted to amplitude scale.')
+    tensor: types.NPArray | OutputHandle[types.NPArray] = connect_field(
+        default=types.NPArray(type="np_array", value=None, dtype="<i8", shape=(1,)),
+        description="The dB-scaled tensor to be converted to amplitude scale.",
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -103,18 +121,22 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.librosa.analysis
 from nodetool.workflows.base_node import BaseNode
 
+
 class DBToPower(SingleOutputGraphNode[types.NPArray], GraphNode[types.NPArray]):
     """
 
-        This node converts a decibel (dB) spectrogram back to power scale.
-        audio, analysis, spectrogram
+    This node converts a decibel (dB) spectrogram back to power scale.
+    audio, analysis, spectrogram
 
-        Useful for:
-        - Reversing dB scaling for audio synthesis
-        - Preparing data for models that expect power-scaled data
+    Useful for:
+    - Reversing dB scaling for audio synthesis
+    - Preparing data for models that expect power-scaled data
     """
 
-    tensor: types.NPArray | OutputHandle[types.NPArray] = connect_field(default=types.NPArray(type='np_array', value=None, dtype='<i8', shape=(1,)), description='The tensor containing the decibel spectrogram.')
+    tensor: types.NPArray | OutputHandle[types.NPArray] = connect_field(
+        default=types.NPArray(type="np_array", value=None, dtype="<i8", shape=(1,)),
+        description="The tensor containing the decibel spectrogram.",
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -131,24 +153,44 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.librosa.analysis
 from nodetool.workflows.base_node import BaseNode
 
+
 class GriffinLim(SingleOutputGraphNode[types.NPArray], GraphNode[types.NPArray]):
     """
 
-        GriffinLim Node performs phase reconstruction on a magnitude spectrogram utilizing the Griffin-Lim algorithm.
-        audio, synthesis, phase reconstruction
+    GriffinLim Node performs phase reconstruction on a magnitude spectrogram utilizing the Griffin-Lim algorithm.
+    audio, synthesis, phase reconstruction
 
-        Applications:
-        - Audio synthesis from spectrograms
-        - Phase reconstruction in audio processing pipelines
+    Applications:
+    - Audio synthesis from spectrograms
+    - Phase reconstruction in audio processing pipelines
     """
 
-    magnitude_spectrogram: types.NPArray | OutputHandle[types.NPArray] = connect_field(default=types.NPArray(type='np_array', value=None, dtype='<i8', shape=(1,)), description='Magnitude spectrogram input for phase reconstruction.')
-    n_iter: int | OutputHandle[int] = connect_field(default=32, description='Number of iterations for the Griffin-Lim algorithm.')
-    hop_length: int | OutputHandle[int] = connect_field(default=512, description='Number of samples between successive frames.')
-    win_length: int | OutputHandle[int] | None = connect_field(default=None, description='Each frame of audio is windowed by `window()`. The window will be of length `win_length` and then padded with zeros to match `n_fft`.')
-    window: str | OutputHandle[str] = connect_field(default='hann', description='Type of window to use for Griffin-Lim transformation.')
-    center: bool | OutputHandle[bool] = connect_field(default=True, description='If True, the signal `y` is padded so that frame `D[:, t]` is centered at `y[t * hop_length]`.')
-    length: int | OutputHandle[int] | None = connect_field(default=None, description='If given, the resulting signal will be zero-padded or clipped to this length.')
+    magnitude_spectrogram: types.NPArray | OutputHandle[types.NPArray] = connect_field(
+        default=types.NPArray(type="np_array", value=None, dtype="<i8", shape=(1,)),
+        description="Magnitude spectrogram input for phase reconstruction.",
+    )
+    n_iter: int | OutputHandle[int] = connect_field(
+        default=32, description="Number of iterations for the Griffin-Lim algorithm."
+    )
+    hop_length: int | OutputHandle[int] = connect_field(
+        default=512, description="Number of samples between successive frames."
+    )
+    win_length: int | OutputHandle[int] | None = connect_field(
+        default=None,
+        description="Each frame of audio is windowed by `window()`. The window will be of length `win_length` and then padded with zeros to match `n_fft`.",
+    )
+    window: str | OutputHandle[str] = connect_field(
+        default="hann",
+        description="Type of window to use for Griffin-Lim transformation.",
+    )
+    center: bool | OutputHandle[bool] = connect_field(
+        default=True,
+        description="If True, the signal `y` is padded so that frame `D[:, t]` is centered at `y[t * hop_length]`.",
+    )
+    length: int | OutputHandle[int] | None = connect_field(
+        default=None,
+        description="If given, the resulting signal will be zero-padded or clipped to this length.",
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -165,19 +207,35 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.librosa.analysis
 from nodetool.workflows.base_node import BaseNode
 
+
 class MFCC(SingleOutputGraphNode[types.NPArray], GraphNode[types.NPArray]):
     """
 
-        MFCC Node computes the Mel-frequency cepstral coefficients (MFCCs) from an audio signal.
-        audio, analysis, frequency, MFCC, MEL
+    MFCC Node computes the Mel-frequency cepstral coefficients (MFCCs) from an audio signal.
+    audio, analysis, frequency, MFCC, MEL
     """
 
-    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(default=types.AudioRef(type='audio', uri='', asset_id=None, data=None, metadata=None), description='The audio file to extract MFCCs from.')
-    n_mfcc: int | OutputHandle[int] = connect_field(default=13, description='The number of MFCCs to extract.')
-    n_fft: int | OutputHandle[int] = connect_field(default=2048, description='The number of samples per frame.')
-    hop_length: int | OutputHandle[int] = connect_field(default=512, description='The number of samples between frames.')
-    fmin: int | OutputHandle[int] = connect_field(default=0, description='The lowest frequency (in Hz).')
-    fmax: int | OutputHandle[int] = connect_field(default=8000, description='The highest frequency (in Hz).')
+    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(
+        default=types.AudioRef(
+            type="audio", uri="", asset_id=None, data=None, metadata=None
+        ),
+        description="The audio file to extract MFCCs from.",
+    )
+    n_mfcc: int | OutputHandle[int] = connect_field(
+        default=13, description="The number of MFCCs to extract."
+    )
+    n_fft: int | OutputHandle[int] = connect_field(
+        default=2048, description="The number of samples per frame."
+    )
+    hop_length: int | OutputHandle[int] = connect_field(
+        default=512, description="The number of samples between frames."
+    )
+    fmin: int | OutputHandle[int] = connect_field(
+        default=0, description="The lowest frequency (in Hz)."
+    )
+    fmax: int | OutputHandle[int] = connect_field(
+        default=8000, description="The highest frequency (in Hz)."
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -194,23 +252,39 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.librosa.analysis
 from nodetool.workflows.base_node import BaseNode
 
+
 class MelSpectrogram(SingleOutputGraphNode[types.NPArray], GraphNode[types.NPArray]):
     """
 
-        MelSpecNode computes the Mel-frequency spectrogram for an audio signal.
-        audio, analysis, spectrogram
+    MelSpecNode computes the Mel-frequency spectrogram for an audio signal.
+    audio, analysis, spectrogram
 
-        Useful for:
-        - Audio feature extraction for machine learning
-        - Speech and music analysis tasks
+    Useful for:
+    - Audio feature extraction for machine learning
+    - Speech and music analysis tasks
     """
 
-    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(default=types.AudioRef(type='audio', uri='', asset_id=None, data=None, metadata=None), description='The audio file to convert to a tensor.')
-    n_fft: int | OutputHandle[int] = connect_field(default=2048, description='The number of samples per frame.')
-    hop_length: int | OutputHandle[int] = connect_field(default=512, description='The number of samples between frames.')
-    n_mels: int | OutputHandle[int] = connect_field(default=128, description='The number of Mel bands to generate.')
-    fmin: int | OutputHandle[int] = connect_field(default=0, description='The lowest frequency (in Hz).')
-    fmax: int | OutputHandle[int] = connect_field(default=8000, description='The highest frequency (in Hz).')
+    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(
+        default=types.AudioRef(
+            type="audio", uri="", asset_id=None, data=None, metadata=None
+        ),
+        description="The audio file to convert to a tensor.",
+    )
+    n_fft: int | OutputHandle[int] = connect_field(
+        default=2048, description="The number of samples per frame."
+    )
+    hop_length: int | OutputHandle[int] = connect_field(
+        default=512, description="The number of samples between frames."
+    )
+    n_mels: int | OutputHandle[int] = connect_field(
+        default=128, description="The number of Mel bands to generate."
+    )
+    fmin: int | OutputHandle[int] = connect_field(
+        default=0, description="The lowest frequency (in Hz)."
+    )
+    fmax: int | OutputHandle[int] = connect_field(
+        default=8000, description="The highest frequency (in Hz)."
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -227,20 +301,26 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.librosa.analysis
 from nodetool.workflows.base_node import BaseNode
 
+
 class PlotSpectrogram(SingleOutputGraphNode[types.ImageRef], GraphNode[types.ImageRef]):
     """
 
-        The PlotSpectrogram node generates a visual representation of the spectrum of frequencies in an audio signal as they vary with time.
-        audio, analysis, frequency, spectrogram
+    The PlotSpectrogram node generates a visual representation of the spectrum of frequencies in an audio signal as they vary with time.
+    audio, analysis, frequency, spectrogram
 
-        #### Applications
-        - Audio Analysis: Allows users to visually see the spectrum of frequencies in their data.
-        - Machine Learning: Used as a preprocessing step for feeding data into image-based ML models.
-        - Sound engineering: Helps in identifying specific tones or frequencies in a music piece or a sound bite.
+    #### Applications
+    - Audio Analysis: Allows users to visually see the spectrum of frequencies in their data.
+    - Machine Learning: Used as a preprocessing step for feeding data into image-based ML models.
+    - Sound engineering: Helps in identifying specific tones or frequencies in a music piece or a sound bite.
     """
 
-    tensor: types.NPArray | OutputHandle[types.NPArray] = connect_field(default=types.NPArray(type='np_array', value=None, dtype='<i8', shape=(1,)), description='The tensor containing the mel spectrogram.')
-    fmax: int | OutputHandle[int] = connect_field(default=8000, description='The highest frequency (in Hz).')
+    tensor: types.NPArray | OutputHandle[types.NPArray] = connect_field(
+        default=types.NPArray(type="np_array", value=None, dtype="<i8", shape=(1,)),
+        description="The tensor containing the mel spectrogram.",
+    )
+    fmax: int | OutputHandle[int] = connect_field(
+        default=8000, description="The highest frequency (in Hz)."
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -257,14 +337,18 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.librosa.analysis
 from nodetool.workflows.base_node import BaseNode
 
+
 class PowertToDB(SingleOutputGraphNode[types.NPArray], GraphNode[types.NPArray]):
     """
 
-        Converts a power spectrogram to decibel (dB) scale.
-        audio, analysis, decibel, spectrogram
+    Converts a power spectrogram to decibel (dB) scale.
+    audio, analysis, decibel, spectrogram
     """
 
-    tensor: types.NPArray | OutputHandle[types.NPArray] = connect_field(default=types.NPArray(type='np_array', value=None, dtype='<i8', shape=(1,)), description='The tensor containing the power spectrogram.')
+    tensor: types.NPArray | OutputHandle[types.NPArray] = connect_field(
+        default=types.NPArray(type="np_array", value=None, dtype="<i8", shape=(1,)),
+        description="The tensor containing the power spectrogram.",
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -281,24 +365,41 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.librosa.analysis
 from nodetool.workflows.base_node import BaseNode
 
+
 class STFT(SingleOutputGraphNode[types.NPArray], GraphNode[types.NPArray]):
     """
 
-        This node computes the Short-Time Fourier Transform (STFT) matrix for an audio signal. The STFT matrix represents the signal in both time and frequency domains, forming the foundation for many audio processing tasks.
-        audio, analysis, fourier, frequency, time
-        #### Applications
-        - Audio Analysis: By transforming the audio signal into a visualizable format, it helps in understanding and analyzing the audio signal.
-        - Sound Processing: It plays a key foundational role in sound effects, tuning, compression, and more.
-        - Audio Feature Extraction: It can be used to analyze frequency-based features for sound classification.
-        - Music Information Retrieval: It helps in music transcription, rhythm and tempo analysis.
+    This node computes the Short-Time Fourier Transform (STFT) matrix for an audio signal. The STFT matrix represents the signal in both time and frequency domains, forming the foundation for many audio processing tasks.
+    audio, analysis, fourier, frequency, time
+    #### Applications
+    - Audio Analysis: By transforming the audio signal into a visualizable format, it helps in understanding and analyzing the audio signal.
+    - Sound Processing: It plays a key foundational role in sound effects, tuning, compression, and more.
+    - Audio Feature Extraction: It can be used to analyze frequency-based features for sound classification.
+    - Music Information Retrieval: It helps in music transcription, rhythm and tempo analysis.
     """
 
-    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(default=types.AudioRef(type='audio', uri='', asset_id=None, data=None, metadata=None), description='The audio file to compute the STFT matrix from.')
-    n_fft: int | OutputHandle[int] = connect_field(default=2048, description='The number of samples per frame.')
-    hop_length: int | OutputHandle[int] = connect_field(default=512, description='The number of samples between frames.')
-    win_length: int | OutputHandle[int] | None = connect_field(default=None, description='The window length. If None, it defaults to n_fft.')
-    window: str | OutputHandle[str] = connect_field(default='hann', description='The type of window to use.')
-    center: bool | OutputHandle[bool] = connect_field(default=True, description='If True, input signal is padded so that frame D[:, t] is centered at y[t * hop_length].')
+    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(
+        default=types.AudioRef(
+            type="audio", uri="", asset_id=None, data=None, metadata=None
+        ),
+        description="The audio file to compute the STFT matrix from.",
+    )
+    n_fft: int | OutputHandle[int] = connect_field(
+        default=2048, description="The number of samples per frame."
+    )
+    hop_length: int | OutputHandle[int] = connect_field(
+        default=512, description="The number of samples between frames."
+    )
+    win_length: int | OutputHandle[int] | None = connect_field(
+        default=None, description="The window length. If None, it defaults to n_fft."
+    )
+    window: str | OutputHandle[str] = connect_field(
+        default="hann", description="The type of window to use."
+    )
+    center: bool | OutputHandle[bool] = connect_field(
+        default=True,
+        description="If True, input signal is padded so that frame D[:, t] is centered at y[t * hop_length].",
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -315,25 +416,35 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.librosa.analysis
 from nodetool.workflows.base_node import BaseNode
 
+
 class SpectralCentroid(SingleOutputGraphNode[types.NPArray], GraphNode[types.NPArray]):
     """
 
-        Computes the spectral centroid of an audio file.
-        audio, analysis, spectral
+    Computes the spectral centroid of an audio file.
+    audio, analysis, spectral
 
-        The spectral centroid indicates where the "center of mass" of the spectrum is located.
-        Perceptually, it has a connection with the impression of "brightness" of a sound.
+    The spectral centroid indicates where the "center of mass" of the spectrum is located.
+    Perceptually, it has a connection with the impression of "brightness" of a sound.
 
-        Use cases:
-        - Analyze the timbral characteristics of audio
-        - Track changes in sound brightness over time
-        - Feature extraction for music genre classification
-        - Audio effect design and sound manipulation
+    Use cases:
+    - Analyze the timbral characteristics of audio
+    - Track changes in sound brightness over time
+    - Feature extraction for music genre classification
+    - Audio effect design and sound manipulation
     """
 
-    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(default=types.AudioRef(type='audio', uri='', asset_id=None, data=None, metadata=None), description='The audio file to analyze.')
-    n_fft: int | OutputHandle[int] = connect_field(default=2048, description='The length of the FFT window.')
-    hop_length: int | OutputHandle[int] = connect_field(default=512, description='Number of samples between successive frames.')
+    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(
+        default=types.AudioRef(
+            type="audio", uri="", asset_id=None, data=None, metadata=None
+        ),
+        description="The audio file to analyze.",
+    )
+    n_fft: int | OutputHandle[int] = connect_field(
+        default=2048, description="The length of the FFT window."
+    )
+    hop_length: int | OutputHandle[int] = connect_field(
+        default=512, description="Number of samples between successive frames."
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -350,23 +461,33 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.librosa.analysis
 from nodetool.workflows.base_node import BaseNode
 
+
 class SpectralContrast(SingleOutputGraphNode[types.NPArray], GraphNode[types.NPArray]):
     """
 
-        The spectral contrast measures the difference in amplitude between the most noticeable parts (peaks) and the less noticeable parts (valleys) in a sound spectrum.
-        audio, analysis, decibel, amplitude
+    The spectral contrast measures the difference in amplitude between the most noticeable parts (peaks) and the less noticeable parts (valleys) in a sound spectrum.
+    audio, analysis, decibel, amplitude
 
-        #### Applications
-        - Music genre classification: distinguishing between different types of music based on the color of sound.
-        - Instrument recognition: recognizing different musical instruments by the difference in their spectral contrast.
-        - Audio analysis: determining various characteristics of audio files.
+    #### Applications
+    - Music genre classification: distinguishing between different types of music based on the color of sound.
+    - Instrument recognition: recognizing different musical instruments by the difference in their spectral contrast.
+    - Audio analysis: determining various characteristics of audio files.
 
-        Useful note: The `n_fft` and `hop_length` parameters affect the resolution of the analysis. A higher `n_fft` provides better frequency resolution but worse time resolution, and vice versa for a lower `hop_length`.
+    Useful note: The `n_fft` and `hop_length` parameters affect the resolution of the analysis. A higher `n_fft` provides better frequency resolution but worse time resolution, and vice versa for a lower `hop_length`.
     """
 
-    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(default=types.AudioRef(type='audio', uri='', asset_id=None, data=None, metadata=None), description='The audio file to extract spectral contrast from.')
-    n_fft: int | OutputHandle[int] = connect_field(default=2048, description='The number of samples per frame.')
-    hop_length: int | OutputHandle[int] = connect_field(default=512, description='The number of samples between frames.')
+    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(
+        default=types.AudioRef(
+            type="audio", uri="", asset_id=None, data=None, metadata=None
+        ),
+        description="The audio file to extract spectral contrast from.",
+    )
+    n_fft: int | OutputHandle[int] = connect_field(
+        default=2048, description="The number of samples per frame."
+    )
+    hop_length: int | OutputHandle[int] = connect_field(
+        default=512, description="The number of samples between frames."
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -375,5 +496,3 @@ class SpectralContrast(SingleOutputGraphNode[types.NPArray], GraphNode[types.NPA
     @classmethod
     def get_node_type(cls):
         return cls.get_node_class().get_node_type()
-
-

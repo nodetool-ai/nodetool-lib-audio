@@ -18,21 +18,33 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.pedalboard
 from nodetool.workflows.base_node import BaseNode
 
+
 class Bitcrush(SingleOutputGraphNode[types.AudioRef], GraphNode[types.AudioRef]):
     """
 
-        Applies a bitcrushing effect to an audio file, reducing bit depth and/or sample rate.
-        audio, effect, distortion
+    Applies a bitcrushing effect to an audio file, reducing bit depth and/or sample rate.
+    audio, effect, distortion
 
-        Use cases:
-        - Create lo-fi or retro-style audio effects
-        - Simulate vintage digital audio equipment
-        - Add digital distortion and artifacts to sounds
+    Use cases:
+    - Create lo-fi or retro-style audio effects
+    - Simulate vintage digital audio equipment
+    - Add digital distortion and artifacts to sounds
     """
 
-    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(default=types.AudioRef(type='audio', uri='', asset_id=None, data=None, metadata=None), description='The audio file to process.')
-    bit_depth: int | OutputHandle[int] = connect_field(default=8, description='The bit depth to reduce the audio to. Lower values create more distortion.')
-    sample_rate_reduction: int | OutputHandle[int] = connect_field(default=1, description='Factor by which to reduce the sample rate. Higher values create more aliasing.')
+    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(
+        default=types.AudioRef(
+            type="audio", uri="", asset_id=None, data=None, metadata=None
+        ),
+        description="The audio file to process.",
+    )
+    bit_depth: int | OutputHandle[int] = connect_field(
+        default=8,
+        description="The bit depth to reduce the audio to. Lower values create more distortion.",
+    )
+    sample_rate_reduction: int | OutputHandle[int] = connect_field(
+        default=1,
+        description="Factor by which to reduce the sample rate. Higher values create more aliasing.",
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -49,23 +61,38 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.pedalboard
 from nodetool.workflows.base_node import BaseNode
 
+
 class Compress(SingleOutputGraphNode[types.AudioRef], GraphNode[types.AudioRef]):
     """
 
-        Applies dynamic range compression to an audio file.
-        audio, effect, dynamics
+    Applies dynamic range compression to an audio file.
+    audio, effect, dynamics
 
-        Use cases:
-        - Even out volume levels in a recording
-        - Increase perceived loudness of audio
-        - Control peaks in audio signals
+    Use cases:
+    - Even out volume levels in a recording
+    - Increase perceived loudness of audio
+    - Control peaks in audio signals
     """
 
-    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(default=types.AudioRef(type='audio', uri='', asset_id=None, data=None, metadata=None), description='The audio file to process.')
-    threshold: float | OutputHandle[float] = connect_field(default=-20.0, description='Threshold in dB above which compression is applied.')
-    ratio: float | OutputHandle[float] = connect_field(default=4.0, description='Compression ratio. Higher values result in more compression.')
-    attack: float | OutputHandle[float] = connect_field(default=5.0, description='Attack time in milliseconds.')
-    release: float | OutputHandle[float] = connect_field(default=50.0, description='Release time in milliseconds.')
+    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(
+        default=types.AudioRef(
+            type="audio", uri="", asset_id=None, data=None, metadata=None
+        ),
+        description="The audio file to process.",
+    )
+    threshold: float | OutputHandle[float] = connect_field(
+        default=-20.0, description="Threshold in dB above which compression is applied."
+    )
+    ratio: float | OutputHandle[float] = connect_field(
+        default=4.0,
+        description="Compression ratio. Higher values result in more compression.",
+    )
+    attack: float | OutputHandle[float] = connect_field(
+        default=5.0, description="Attack time in milliseconds."
+    )
+    release: float | OutputHandle[float] = connect_field(
+        default=50.0, description="Release time in milliseconds."
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -82,22 +109,35 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.pedalboard
 from nodetool.workflows.base_node import BaseNode
 
+
 class Delay(SingleOutputGraphNode[types.AudioRef], GraphNode[types.AudioRef]):
     """
 
-        Applies a delay effect to an audio file.
-        audio, effect, time-based
+    Applies a delay effect to an audio file.
+    audio, effect, time-based
 
-        Use cases:
-        - Create echo effects
-        - Add spaciousness to sounds
-        - Produce rhythmic patterns
+    Use cases:
+    - Create echo effects
+    - Add spaciousness to sounds
+    - Produce rhythmic patterns
     """
 
-    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(default=types.AudioRef(type='audio', uri='', asset_id=None, data=None, metadata=None), description='The audio file to process.')
-    delay_seconds: float | OutputHandle[float] = connect_field(default=0.5, description='Delay time in seconds.')
-    feedback: float | OutputHandle[float] = connect_field(default=0.3, description='Amount of delayed signal fed back into the effect.')
-    mix: float | OutputHandle[float] = connect_field(default=0.5, description='Mix between the dry (original) and wet (delayed) signals.')
+    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(
+        default=types.AudioRef(
+            type="audio", uri="", asset_id=None, data=None, metadata=None
+        ),
+        description="The audio file to process.",
+    )
+    delay_seconds: float | OutputHandle[float] = connect_field(
+        default=0.5, description="Delay time in seconds."
+    )
+    feedback: float | OutputHandle[float] = connect_field(
+        default=0.3, description="Amount of delayed signal fed back into the effect."
+    )
+    mix: float | OutputHandle[float] = connect_field(
+        default=0.5,
+        description="Mix between the dry (original) and wet (delayed) signals.",
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -114,20 +154,28 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.pedalboard
 from nodetool.workflows.base_node import BaseNode
 
+
 class Distortion(SingleOutputGraphNode[types.AudioRef], GraphNode[types.AudioRef]):
     """
 
-        Applies a distortion effect to an audio file.
-        audio, effect, distortion
+    Applies a distortion effect to an audio file.
+    audio, effect, distortion
 
-        Use cases:
-        - Add grit and character to instruments
-        - Create aggressive sound effects
-        - Simulate overdriven amplifiers
+    Use cases:
+    - Add grit and character to instruments
+    - Create aggressive sound effects
+    - Simulate overdriven amplifiers
     """
 
-    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(default=types.AudioRef(type='audio', uri='', asset_id=None, data=None, metadata=None), description='The audio file to process.')
-    drive_db: float | OutputHandle[float] = connect_field(default=25.0, description='Amount of distortion to apply in decibels.')
+    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(
+        default=types.AudioRef(
+            type="audio", uri="", asset_id=None, data=None, metadata=None
+        ),
+        description="The audio file to process.",
+    )
+    drive_db: float | OutputHandle[float] = connect_field(
+        default=25.0, description="Amount of distortion to apply in decibels."
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -144,20 +192,29 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.pedalboard
 from nodetool.workflows.base_node import BaseNode
 
+
 class Gain(SingleOutputGraphNode[types.AudioRef], GraphNode[types.AudioRef]):
     """
 
-        Applies a gain (volume adjustment) to an audio file.
-        audio, effect, volume
+    Applies a gain (volume adjustment) to an audio file.
+    audio, effect, volume
 
-        Use cases:
-        - Increase or decrease overall volume of audio
-        - Balance levels between different audio tracks
-        - Prepare audio for further processing
+    Use cases:
+    - Increase or decrease overall volume of audio
+    - Balance levels between different audio tracks
+    - Prepare audio for further processing
     """
 
-    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(default=types.AudioRef(type='audio', uri='', asset_id=None, data=None, metadata=None), description='The audio file to process.')
-    gain_db: float | OutputHandle[float] = connect_field(default=0.0, description='Gain to apply in decibels. Positive values increase volume, negative values decrease it.')
+    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(
+        default=types.AudioRef(
+            type="audio", uri="", asset_id=None, data=None, metadata=None
+        ),
+        description="The audio file to process.",
+    )
+    gain_db: float | OutputHandle[float] = connect_field(
+        default=0.0,
+        description="Gain to apply in decibels. Positive values increase volume, negative values decrease it.",
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -174,20 +231,28 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.pedalboard
 from nodetool.workflows.base_node import BaseNode
 
+
 class HighPassFilter(SingleOutputGraphNode[types.AudioRef], GraphNode[types.AudioRef]):
     """
 
-        Applies a high-pass filter to attenuate frequencies below a cutoff point.
-        audio, effect, equalizer
+    Applies a high-pass filter to attenuate frequencies below a cutoff point.
+    audio, effect, equalizer
 
-        Use cases:
-        - Remove low-frequency rumble or noise
-        - Clean up the low end of a mix
-        - Create filter sweep effects
+    Use cases:
+    - Remove low-frequency rumble or noise
+    - Clean up the low end of a mix
+    - Create filter sweep effects
     """
 
-    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(default=types.AudioRef(type='audio', uri='', asset_id=None, data=None, metadata=None), description='The audio file to process.')
-    cutoff_frequency_hz: float | OutputHandle[float] = connect_field(default=80.0, description='The cutoff frequency of the high-pass filter in Hz.')
+    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(
+        default=types.AudioRef(
+            type="audio", uri="", asset_id=None, data=None, metadata=None
+        ),
+        description="The audio file to process.",
+    )
+    cutoff_frequency_hz: float | OutputHandle[float] = connect_field(
+        default=80.0, description="The cutoff frequency of the high-pass filter in Hz."
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -204,21 +269,32 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.pedalboard
 from nodetool.workflows.base_node import BaseNode
 
+
 class HighShelfFilter(SingleOutputGraphNode[types.AudioRef], GraphNode[types.AudioRef]):
     """
 
-        Applies a high shelf filter to boost or cut high frequencies.
-        audio, effect, equalizer
+    Applies a high shelf filter to boost or cut high frequencies.
+    audio, effect, equalizer
 
-        Use cases:
-        - Enhance or reduce treble frequencies
-        - Add brightness or air to audio
-        - Tame harsh high frequencies
+    Use cases:
+    - Enhance or reduce treble frequencies
+    - Add brightness or air to audio
+    - Tame harsh high frequencies
     """
 
-    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(default=types.AudioRef(type='audio', uri='', asset_id=None, data=None, metadata=None), description='The audio file to process.')
-    cutoff_frequency_hz: float | OutputHandle[float] = connect_field(default=5000.0, description='The cutoff frequency of the shelf filter in Hz.')
-    gain_db: float | OutputHandle[float] = connect_field(default=0.0, description='The gain to apply to the frequencies above the cutoff, in dB.')
+    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(
+        default=types.AudioRef(
+            type="audio", uri="", asset_id=None, data=None, metadata=None
+        ),
+        description="The audio file to process.",
+    )
+    cutoff_frequency_hz: float | OutputHandle[float] = connect_field(
+        default=5000.0, description="The cutoff frequency of the shelf filter in Hz."
+    )
+    gain_db: float | OutputHandle[float] = connect_field(
+        default=0.0,
+        description="The gain to apply to the frequencies above the cutoff, in dB.",
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -235,21 +311,31 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.pedalboard
 from nodetool.workflows.base_node import BaseNode
 
+
 class Limiter(SingleOutputGraphNode[types.AudioRef], GraphNode[types.AudioRef]):
     """
 
-        Applies a limiter effect to an audio file.
-        audio, effect, dynamics
+    Applies a limiter effect to an audio file.
+    audio, effect, dynamics
 
-        Use cases:
-        - Prevent audio clipping
-        - Increase perceived loudness without distortion
-        - Control dynamic range of audio
+    Use cases:
+    - Prevent audio clipping
+    - Increase perceived loudness without distortion
+    - Control dynamic range of audio
     """
 
-    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(default=types.AudioRef(type='audio', uri='', asset_id=None, data=None, metadata=None), description='The audio file to process.')
-    threshold_db: float | OutputHandle[float] = connect_field(default=-2.0, description='Threshold in dB above which the limiter is applied.')
-    release_ms: float | OutputHandle[float] = connect_field(default=250.0, description='Release time in milliseconds.')
+    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(
+        default=types.AudioRef(
+            type="audio", uri="", asset_id=None, data=None, metadata=None
+        ),
+        description="The audio file to process.",
+    )
+    threshold_db: float | OutputHandle[float] = connect_field(
+        default=-2.0, description="Threshold in dB above which the limiter is applied."
+    )
+    release_ms: float | OutputHandle[float] = connect_field(
+        default=250.0, description="Release time in milliseconds."
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -266,20 +352,28 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.pedalboard
 from nodetool.workflows.base_node import BaseNode
 
+
 class LowPassFilter(SingleOutputGraphNode[types.AudioRef], GraphNode[types.AudioRef]):
     """
 
-        Applies a low-pass filter to attenuate frequencies above a cutoff point.
-        audio, effect, equalizer
+    Applies a low-pass filter to attenuate frequencies above a cutoff point.
+    audio, effect, equalizer
 
-        Use cases:
-        - Reduce high-frequency harshness
-        - Simulate muffled or distant sounds
-        - Create dub-style effects
+    Use cases:
+    - Reduce high-frequency harshness
+    - Simulate muffled or distant sounds
+    - Create dub-style effects
     """
 
-    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(default=types.AudioRef(type='audio', uri='', asset_id=None, data=None, metadata=None), description='The audio file to process.')
-    cutoff_frequency_hz: float | OutputHandle[float] = connect_field(default=5000.0, description='The cutoff frequency of the low-pass filter in Hz.')
+    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(
+        default=types.AudioRef(
+            type="audio", uri="", asset_id=None, data=None, metadata=None
+        ),
+        description="The audio file to process.",
+    )
+    cutoff_frequency_hz: float | OutputHandle[float] = connect_field(
+        default=5000.0, description="The cutoff frequency of the low-pass filter in Hz."
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -296,21 +390,32 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.pedalboard
 from nodetool.workflows.base_node import BaseNode
 
+
 class LowShelfFilter(SingleOutputGraphNode[types.AudioRef], GraphNode[types.AudioRef]):
     """
 
-        Applies a low shelf filter to boost or cut low frequencies.
-        audio, effect, equalizer
+    Applies a low shelf filter to boost or cut low frequencies.
+    audio, effect, equalizer
 
-        Use cases:
-        - Enhance or reduce bass frequencies
-        - Shape the low-end response of audio
-        - Compensate for speaker or room deficiencies
+    Use cases:
+    - Enhance or reduce bass frequencies
+    - Shape the low-end response of audio
+    - Compensate for speaker or room deficiencies
     """
 
-    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(default=types.AudioRef(type='audio', uri='', asset_id=None, data=None, metadata=None), description='The audio file to process.')
-    cutoff_frequency_hz: float | OutputHandle[float] = connect_field(default=200.0, description='The cutoff frequency of the shelf filter in Hz.')
-    gain_db: float | OutputHandle[float] = connect_field(default=0.0, description='The gain to apply to the frequencies below the cutoff, in dB.')
+    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(
+        default=types.AudioRef(
+            type="audio", uri="", asset_id=None, data=None, metadata=None
+        ),
+        description="The audio file to process.",
+    )
+    cutoff_frequency_hz: float | OutputHandle[float] = connect_field(
+        default=200.0, description="The cutoff frequency of the shelf filter in Hz."
+    )
+    gain_db: float | OutputHandle[float] = connect_field(
+        default=0.0,
+        description="The gain to apply to the frequencies below the cutoff, in dB.",
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -327,22 +432,34 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.pedalboard
 from nodetool.workflows.base_node import BaseNode
 
+
 class NoiseGate(SingleOutputGraphNode[types.AudioRef], GraphNode[types.AudioRef]):
     """
 
-        Applies a noise gate effect to an audio file.
-        audio, effect, dynamics
+    Applies a noise gate effect to an audio file.
+    audio, effect, dynamics
 
-        Use cases:
-        - Reduce background noise in recordings
-        - Clean up audio tracks with unwanted low-level sounds
-        - Create rhythmic effects by gating sustained sounds
+    Use cases:
+    - Reduce background noise in recordings
+    - Clean up audio tracks with unwanted low-level sounds
+    - Create rhythmic effects by gating sustained sounds
     """
 
-    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(default=types.AudioRef(type='audio', uri='', asset_id=None, data=None, metadata=None), description='The audio file to process.')
-    threshold_db: float | OutputHandle[float] = connect_field(default=-50.0, description='Threshold in dB below which the gate is active.')
-    attack_ms: float | OutputHandle[float] = connect_field(default=1.0, description='Attack time in milliseconds.')
-    release_ms: float | OutputHandle[float] = connect_field(default=100.0, description='Release time in milliseconds.')
+    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(
+        default=types.AudioRef(
+            type="audio", uri="", asset_id=None, data=None, metadata=None
+        ),
+        description="The audio file to process.",
+    )
+    threshold_db: float | OutputHandle[float] = connect_field(
+        default=-50.0, description="Threshold in dB below which the gate is active."
+    )
+    attack_ms: float | OutputHandle[float] = connect_field(
+        default=1.0, description="Attack time in milliseconds."
+    )
+    release_ms: float | OutputHandle[float] = connect_field(
+        default=100.0, description="Release time in milliseconds."
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -359,21 +476,33 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.pedalboard
 from nodetool.workflows.base_node import BaseNode
 
+
 class PeakFilter(SingleOutputGraphNode[types.AudioRef], GraphNode[types.AudioRef]):
     """
 
-        Applies a peak filter to boost or cut a specific frequency range.
-        audio, effect, equalizer
+    Applies a peak filter to boost or cut a specific frequency range.
+    audio, effect, equalizer
 
-        Use cases:
-        - Isolate specific frequency ranges
-        - Create telephone or radio voice effects
-        - Focus on particular instrument ranges in a mix
+    Use cases:
+    - Isolate specific frequency ranges
+    - Create telephone or radio voice effects
+    - Focus on particular instrument ranges in a mix
     """
 
-    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(default=types.AudioRef(type='audio', uri='', asset_id=None, data=None, metadata=None), description='The audio file to process.')
-    cutoff_frequency_hz: float | OutputHandle[float] = connect_field(default=1000.0, description='The cutoff frequency of the band-pass filter in Hz.')
-    q_factor: float | OutputHandle[float] = connect_field(default=1.0, description='The Q factor, determining the width of the band. Higher values create narrower bands.')
+    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(
+        default=types.AudioRef(
+            type="audio", uri="", asset_id=None, data=None, metadata=None
+        ),
+        description="The audio file to process.",
+    )
+    cutoff_frequency_hz: float | OutputHandle[float] = connect_field(
+        default=1000.0,
+        description="The cutoff frequency of the band-pass filter in Hz.",
+    )
+    q_factor: float | OutputHandle[float] = connect_field(
+        default=1.0,
+        description="The Q factor, determining the width of the band. Higher values create narrower bands.",
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -390,24 +519,42 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.pedalboard
 from nodetool.workflows.base_node import BaseNode
 
+
 class Phaser(SingleOutputGraphNode[types.AudioRef], GraphNode[types.AudioRef]):
     """
 
-        Applies a phaser effect to an audio file.
-        audio, effect, modulation
+    Applies a phaser effect to an audio file.
+    audio, effect, modulation
 
-        Use cases:
-        - Create sweeping, swooshing sounds
-        - Add movement to static sounds
-        - Produce psychedelic or space-like effects
+    Use cases:
+    - Create sweeping, swooshing sounds
+    - Add movement to static sounds
+    - Produce psychedelic or space-like effects
     """
 
-    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(default=types.AudioRef(type='audio', uri='', asset_id=None, data=None, metadata=None), description='The audio file to process.')
-    rate_hz: float | OutputHandle[float] = connect_field(default=1.0, description='Rate of the phaser effect in Hz.')
-    depth: float | OutputHandle[float] = connect_field(default=0.5, description='Depth of the phaser effect.')
-    centre_frequency_hz: float | OutputHandle[float] = connect_field(default=1300.0, description='Centre frequency of the phaser in Hz.')
-    feedback: float | OutputHandle[float] = connect_field(default=0.0, description='Feedback of the phaser effect. Negative values invert the phase.')
-    mix: float | OutputHandle[float] = connect_field(default=0.5, description='Mix between the dry (original) and wet (effected) signals.')
+    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(
+        default=types.AudioRef(
+            type="audio", uri="", asset_id=None, data=None, metadata=None
+        ),
+        description="The audio file to process.",
+    )
+    rate_hz: float | OutputHandle[float] = connect_field(
+        default=1.0, description="Rate of the phaser effect in Hz."
+    )
+    depth: float | OutputHandle[float] = connect_field(
+        default=0.5, description="Depth of the phaser effect."
+    )
+    centre_frequency_hz: float | OutputHandle[float] = connect_field(
+        default=1300.0, description="Centre frequency of the phaser in Hz."
+    )
+    feedback: float | OutputHandle[float] = connect_field(
+        default=0.0,
+        description="Feedback of the phaser effect. Negative values invert the phase.",
+    )
+    mix: float | OutputHandle[float] = connect_field(
+        default=0.5,
+        description="Mix between the dry (original) and wet (effected) signals.",
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -424,20 +571,29 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.pedalboard
 from nodetool.workflows.base_node import BaseNode
 
+
 class PitchShift(SingleOutputGraphNode[types.AudioRef], GraphNode[types.AudioRef]):
     """
 
-        Shifts the pitch of an audio file without changing its duration.
-        audio, effect, pitch
+    Shifts the pitch of an audio file without changing its duration.
+    audio, effect, pitch
 
-        Use cases:
-        - Transpose audio to a different key
-        - Create harmonies or vocal effects
-        - Adjust instrument tuning
+    Use cases:
+    - Transpose audio to a different key
+    - Create harmonies or vocal effects
+    - Adjust instrument tuning
     """
 
-    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(default=types.AudioRef(type='audio', uri='', asset_id=None, data=None, metadata=None), description='The audio file to process.')
-    semitones: float | OutputHandle[float] = connect_field(default=0.0, description='Number of semitones to shift the pitch. Positive values shift up, negative values shift down.')
+    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(
+        default=types.AudioRef(
+            type="audio", uri="", asset_id=None, data=None, metadata=None
+        ),
+        description="The audio file to process.",
+    )
+    semitones: float | OutputHandle[float] = connect_field(
+        default=0.0,
+        description="Number of semitones to shift the pitch. Positive values shift up, negative values shift down.",
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -454,23 +610,39 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.pedalboard
 from nodetool.workflows.base_node import BaseNode
 
+
 class Reverb(SingleOutputGraphNode[types.AudioRef], GraphNode[types.AudioRef]):
     """
 
-        Applies a reverb effect to an audio file.
-        audio, effect, reverb
+    Applies a reverb effect to an audio file.
+    audio, effect, reverb
 
-        Use cases:
-        - Add spatial depth to dry recordings
-        - Simulate different room acoustics
-        - Create atmospheric sound effects
+    Use cases:
+    - Add spatial depth to dry recordings
+    - Simulate different room acoustics
+    - Create atmospheric sound effects
     """
 
-    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(default=types.AudioRef(type='audio', uri='', asset_id=None, data=None, metadata=None), description='The audio file to process.')
-    room_scale: float | OutputHandle[float] = connect_field(default=0.5, description='Size of the simulated room. Higher values create larger spaces.')
-    damping: float | OutputHandle[float] = connect_field(default=0.5, description='Amount of high frequency absorption. Higher values create a duller sound.')
-    wet_level: float | OutputHandle[float] = connect_field(default=0.15, description='Level of the reverb effect in the output.')
-    dry_level: float | OutputHandle[float] = connect_field(default=0.5, description='Level of the original signal in the output.')
+    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(
+        default=types.AudioRef(
+            type="audio", uri="", asset_id=None, data=None, metadata=None
+        ),
+        description="The audio file to process.",
+    )
+    room_scale: float | OutputHandle[float] = connect_field(
+        default=0.5,
+        description="Size of the simulated room. Higher values create larger spaces.",
+    )
+    damping: float | OutputHandle[float] = connect_field(
+        default=0.5,
+        description="Amount of high frequency absorption. Higher values create a duller sound.",
+    )
+    wet_level: float | OutputHandle[float] = connect_field(
+        default=0.15, description="Level of the reverb effect in the output."
+    )
+    dry_level: float | OutputHandle[float] = connect_field(
+        default=0.5, description="Level of the original signal in the output."
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -487,20 +659,29 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.pedalboard
 from nodetool.workflows.base_node import BaseNode
 
+
 class TimeStretch(SingleOutputGraphNode[types.AudioRef], GraphNode[types.AudioRef]):
     """
 
-        Changes the speed of an audio file without altering its pitch.
-        audio, transform, time
+    Changes the speed of an audio file without altering its pitch.
+    audio, transform, time
 
-        Use cases:
-        - Adjust audio duration to fit video length
-        - Create slow-motion or fast-motion audio effects
-        - Synchronize audio tracks of different lengths
+    Use cases:
+    - Adjust audio duration to fit video length
+    - Create slow-motion or fast-motion audio effects
+    - Synchronize audio tracks of different lengths
     """
 
-    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(default=types.AudioRef(type='audio', uri='', asset_id=None, data=None, metadata=None), description='The audio file to process.')
-    rate: float | OutputHandle[float] = connect_field(default=1.0, description='Time stretch factor. Values > 1 speed up, < 1 slow down.')
+    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(
+        default=types.AudioRef(
+            type="audio", uri="", asset_id=None, data=None, metadata=None
+        ),
+        description="The audio file to process.",
+    )
+    rate: float | OutputHandle[float] = connect_field(
+        default=1.0,
+        description="Time stretch factor. Values > 1 speed up, < 1 slow down.",
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -509,5 +690,3 @@ class TimeStretch(SingleOutputGraphNode[types.AudioRef], GraphNode[types.AudioRe
     @classmethod
     def get_node_type(cls):
         return cls.get_node_class().get_node_type()
-
-

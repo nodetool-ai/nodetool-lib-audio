@@ -18,20 +18,28 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.librosa.segmentation
 from nodetool.workflows.base_node import BaseNode
 
+
 class DetectOnsets(SingleOutputGraphNode[types.NPArray], GraphNode[types.NPArray]):
     """
 
-        Detect onsets in an audio file.
-        audio, analysis, segmentation
+    Detect onsets in an audio file.
+    audio, analysis, segmentation
 
-        Use cases:
-        - Identify beat locations in music
-        - Segment audio based on changes in energy or spectral content
-        - Prepare audio for further processing or analysis
+    Use cases:
+    - Identify beat locations in music
+    - Segment audio based on changes in energy or spectral content
+    - Prepare audio for further processing or analysis
     """
 
-    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(default=types.AudioRef(type='audio', uri='', asset_id=None, data=None, metadata=None), description='The input audio file to analyze.')
-    hop_length: int | OutputHandle[int] = connect_field(default=512, description='Number of samples between successive frames.')
+    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(
+        default=types.AudioRef(
+            type="audio", uri="", asset_id=None, data=None, metadata=None
+        ),
+        description="The input audio file to analyze.",
+    )
+    hop_length: int | OutputHandle[int] = connect_field(
+        default=512, description="Number of samples between successive frames."
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -48,21 +56,33 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.librosa.segmentation
 from nodetool.workflows.base_node import BaseNode
 
-class SaveAudioSegments(SingleOutputGraphNode[types.FolderRef], GraphNode[types.FolderRef]):
+
+class SaveAudioSegments(
+    SingleOutputGraphNode[types.FolderRef], GraphNode[types.FolderRef]
+):
     """
 
-        Save a list of audio segments to a specified folder.
-        audio, save, export
+    Save a list of audio segments to a specified folder.
+    audio, save, export
 
-        Use cases:
-        - Export segmented audio files for further processing or analysis
-        - Create a dataset of audio clips from a longer recording
-        - Organize audio segments into a structured format
+    Use cases:
+    - Export segmented audio files for further processing or analysis
+    - Create a dataset of audio clips from a longer recording
+    - Organize audio segments into a structured format
     """
 
-    segments: list[types.AudioRef] | OutputHandle[list[types.AudioRef]] = connect_field(default=[], description='The list of audio segments to save.')
-    output_folder: types.FolderRef | OutputHandle[types.FolderRef] = connect_field(default=types.FolderRef(type='folder', uri='', asset_id=None, data=None, metadata=None), description='The folder to save the audio segments in.')
-    name_prefix: str | OutputHandle[str] = connect_field(default='segment', description='Prefix for the saved audio file names.')
+    segments: list[types.AudioRef] | OutputHandle[list[types.AudioRef]] = connect_field(
+        default=[], description="The list of audio segments to save."
+    )
+    output_folder: types.FolderRef | OutputHandle[types.FolderRef] = connect_field(
+        default=types.FolderRef(
+            type="folder", uri="", asset_id=None, data=None, metadata=None
+        ),
+        description="The folder to save the audio segments in.",
+    )
+    name_prefix: str | OutputHandle[str] = connect_field(
+        default="segment", description="Prefix for the saved audio file names."
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -79,21 +99,34 @@ from nodetool.dsl.handles import OutputHandle, OutputsProxy, connect_field
 import nodetool.nodes.lib.librosa.segmentation
 from nodetool.workflows.base_node import BaseNode
 
-class SegmentAudioByOnsets(SingleOutputGraphNode[list[types.AudioRef]], GraphNode[list[types.AudioRef]]):
+
+class SegmentAudioByOnsets(
+    SingleOutputGraphNode[list[types.AudioRef]], GraphNode[list[types.AudioRef]]
+):
     """
 
-        Segment an audio file based on detected onsets.
-        audio, segmentation, processing
+    Segment an audio file based on detected onsets.
+    audio, segmentation, processing
 
-        Use cases:
-        - Split a long audio recording into individual segments
-        - Prepare audio clips for further analysis or processing
-        - Extract specific parts of an audio file based on onset locations
+    Use cases:
+    - Split a long audio recording into individual segments
+    - Prepare audio clips for further analysis or processing
+    - Extract specific parts of an audio file based on onset locations
     """
 
-    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(default=types.AudioRef(type='audio', uri='', asset_id=None, data=None, metadata=None), description='The input audio file to segment.')
-    onsets: types.NPArray | OutputHandle[types.NPArray] = connect_field(default=types.NPArray(type='np_array', value=None, dtype='<i8', shape=(1,)), description='The onset times detected in the audio.')
-    min_segment_length: float | OutputHandle[float] = connect_field(default=0.1, description='Minimum length of a segment in seconds.')
+    audio: types.AudioRef | OutputHandle[types.AudioRef] = connect_field(
+        default=types.AudioRef(
+            type="audio", uri="", asset_id=None, data=None, metadata=None
+        ),
+        description="The input audio file to segment.",
+    )
+    onsets: types.NPArray | OutputHandle[types.NPArray] = connect_field(
+        default=types.NPArray(type="np_array", value=None, dtype="<i8", shape=(1,)),
+        description="The onset times detected in the audio.",
+    )
+    min_segment_length: float | OutputHandle[float] = connect_field(
+        default=0.1, description="Minimum length of a segment in seconds."
+    )
 
     @classmethod
     def get_node_class(cls) -> type[BaseNode]:
@@ -102,5 +135,3 @@ class SegmentAudioByOnsets(SingleOutputGraphNode[list[types.AudioRef]], GraphNod
     @classmethod
     def get_node_type(cls):
         return cls.get_node_class().get_node_type()
-
-

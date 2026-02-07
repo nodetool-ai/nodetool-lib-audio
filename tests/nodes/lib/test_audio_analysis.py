@@ -19,7 +19,6 @@ from nodetool.nodes.lib.librosa.analysis import (
     STFT,
 )
 
-
 dummy_tensor = NPArray.from_numpy(np.random.rand(100, 100))
 tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".wav")
 AudioSegment.silent(5000, 44_100).export(tmp.name, format="wav")
