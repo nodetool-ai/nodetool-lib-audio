@@ -1,7 +1,7 @@
 {
   "name": "nodetool-lib-audio",
   "description": "Nodetool Audio nodes",
-  "version": "0.6.3-rc.18",
+  "version": "0.6.3-rc.25",
   "authors": [
     "Matthias Georgi <matti.georgi@gmail.com>"
   ],
@@ -1366,175 +1366,6 @@
       ]
     },
     {
-      "title": "Detect Onsets",
-      "description": "Detect onsets in an audio file.\n    audio, analysis, segmentation\n\n    Use cases:\n    - Identify beat locations in music\n    - Segment audio based on changes in energy or spectral content\n    - Prepare audio for further processing or analysis",
-      "namespace": "lib.librosa.segmentation",
-      "node_type": "lib.librosa.segmentation.DetectOnsets",
-      "properties": [
-        {
-          "name": "audio",
-          "type": {
-            "type": "audio"
-          },
-          "default": {
-            "type": "audio",
-            "uri": "",
-            "asset_id": null,
-            "data": null,
-            "metadata": null
-          },
-          "title": "Audio",
-          "description": "The input audio file to analyze."
-        },
-        {
-          "name": "hop_length",
-          "type": {
-            "type": "int"
-          },
-          "default": 512,
-          "title": "Hop Length",
-          "description": "Number of samples between successive frames."
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "np_array"
-          },
-          "name": "output"
-        }
-      ],
-      "basic_fields": [
-        "audio",
-        "hop_length"
-      ]
-    },
-    {
-      "title": "Save Audio Segments",
-      "description": "Save a list of audio segments to a specified folder.\n    audio, save, export\n\n    Use cases:\n    - Export segmented audio files for further processing or analysis\n    - Create a dataset of audio clips from a longer recording\n    - Organize audio segments into a structured format",
-      "namespace": "lib.librosa.segmentation",
-      "node_type": "lib.librosa.segmentation.SaveAudioSegments",
-      "properties": [
-        {
-          "name": "segments",
-          "type": {
-            "type": "list",
-            "type_args": [
-              {
-                "type": "audio"
-              }
-            ]
-          },
-          "default": [],
-          "title": "Segments",
-          "description": "The list of audio segments to save."
-        },
-        {
-          "name": "output_folder",
-          "type": {
-            "type": "folder"
-          },
-          "default": {
-            "type": "folder",
-            "uri": "",
-            "asset_id": null,
-            "data": null,
-            "metadata": null
-          },
-          "title": "Output Folder",
-          "description": "The folder to save the audio segments in."
-        },
-        {
-          "name": "name_prefix",
-          "type": {
-            "type": "str"
-          },
-          "default": "segment",
-          "title": "Name Prefix",
-          "description": "Prefix for the saved audio file names."
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "folder"
-          },
-          "name": "output"
-        }
-      ],
-      "basic_fields": [
-        "segments",
-        "output_folder",
-        "name_prefix"
-      ]
-    },
-    {
-      "title": "Segment Audio By Onsets",
-      "description": "Segment an audio file based on detected onsets.\n    audio, segmentation, processing\n\n    Use cases:\n    - Split a long audio recording into individual segments\n    - Prepare audio clips for further analysis or processing\n    - Extract specific parts of an audio file based on onset locations",
-      "namespace": "lib.librosa.segmentation",
-      "node_type": "lib.librosa.segmentation.SegmentAudioByOnsets",
-      "properties": [
-        {
-          "name": "audio",
-          "type": {
-            "type": "audio"
-          },
-          "default": {
-            "type": "audio",
-            "uri": "",
-            "asset_id": null,
-            "data": null,
-            "metadata": null
-          },
-          "title": "Audio",
-          "description": "The input audio file to segment."
-        },
-        {
-          "name": "onsets",
-          "type": {
-            "type": "np_array"
-          },
-          "default": {
-            "type": "np_array",
-            "value": null,
-            "dtype": "<i8",
-            "shape": [
-              1
-            ]
-          },
-          "title": "Onsets",
-          "description": "The onset times detected in the audio."
-        },
-        {
-          "name": "min_segment_length",
-          "type": {
-            "type": "float"
-          },
-          "default": 0.1,
-          "title": "Min Segment Length",
-          "description": "Minimum length of a segment in seconds."
-        }
-      ],
-      "outputs": [
-        {
-          "type": {
-            "type": "list",
-            "type_args": [
-              {
-                "type": "audio"
-              }
-            ]
-          },
-          "name": "output"
-        }
-      ],
-      "basic_fields": [
-        "audio",
-        "onsets",
-        "min_segment_length"
-      ]
-    },
-    {
       "title": "Amplitude To DB",
       "description": "Converts an amplitude spectrogram to a dB-scaled spectrogram.\n    audio, analysis, spectrogram\n\n    This node is useful for:\n    - Compressing the dynamic range of spectrograms for visualization\n    - Preparing input for audio models that expect dB-scaled data",
       "namespace": "lib.librosa.analysis",
@@ -2241,6 +2072,175 @@
         "audio",
         "n_fft",
         "hop_length"
+      ]
+    },
+    {
+      "title": "Detect Onsets",
+      "description": "Detect onsets in an audio file.\n    audio, analysis, segmentation\n\n    Use cases:\n    - Identify beat locations in music\n    - Segment audio based on changes in energy or spectral content\n    - Prepare audio for further processing or analysis",
+      "namespace": "lib.librosa.segmentation",
+      "node_type": "lib.librosa.segmentation.DetectOnsets",
+      "properties": [
+        {
+          "name": "audio",
+          "type": {
+            "type": "audio"
+          },
+          "default": {
+            "type": "audio",
+            "uri": "",
+            "asset_id": null,
+            "data": null,
+            "metadata": null
+          },
+          "title": "Audio",
+          "description": "The input audio file to analyze."
+        },
+        {
+          "name": "hop_length",
+          "type": {
+            "type": "int"
+          },
+          "default": 512,
+          "title": "Hop Length",
+          "description": "Number of samples between successive frames."
+        }
+      ],
+      "outputs": [
+        {
+          "type": {
+            "type": "np_array"
+          },
+          "name": "output"
+        }
+      ],
+      "basic_fields": [
+        "audio",
+        "hop_length"
+      ]
+    },
+    {
+      "title": "Save Audio Segments",
+      "description": "Save a list of audio segments to a specified folder.\n    audio, save, export\n\n    Use cases:\n    - Export segmented audio files for further processing or analysis\n    - Create a dataset of audio clips from a longer recording\n    - Organize audio segments into a structured format",
+      "namespace": "lib.librosa.segmentation",
+      "node_type": "lib.librosa.segmentation.SaveAudioSegments",
+      "properties": [
+        {
+          "name": "segments",
+          "type": {
+            "type": "list",
+            "type_args": [
+              {
+                "type": "audio"
+              }
+            ]
+          },
+          "default": [],
+          "title": "Segments",
+          "description": "The list of audio segments to save."
+        },
+        {
+          "name": "output_folder",
+          "type": {
+            "type": "folder"
+          },
+          "default": {
+            "type": "folder",
+            "uri": "",
+            "asset_id": null,
+            "data": null,
+            "metadata": null
+          },
+          "title": "Output Folder",
+          "description": "The folder to save the audio segments in."
+        },
+        {
+          "name": "name_prefix",
+          "type": {
+            "type": "str"
+          },
+          "default": "segment",
+          "title": "Name Prefix",
+          "description": "Prefix for the saved audio file names."
+        }
+      ],
+      "outputs": [
+        {
+          "type": {
+            "type": "folder"
+          },
+          "name": "output"
+        }
+      ],
+      "basic_fields": [
+        "segments",
+        "output_folder",
+        "name_prefix"
+      ]
+    },
+    {
+      "title": "Segment Audio By Onsets",
+      "description": "Segment an audio file based on detected onsets.\n    audio, segmentation, processing\n\n    Use cases:\n    - Split a long audio recording into individual segments\n    - Prepare audio clips for further analysis or processing\n    - Extract specific parts of an audio file based on onset locations",
+      "namespace": "lib.librosa.segmentation",
+      "node_type": "lib.librosa.segmentation.SegmentAudioByOnsets",
+      "properties": [
+        {
+          "name": "audio",
+          "type": {
+            "type": "audio"
+          },
+          "default": {
+            "type": "audio",
+            "uri": "",
+            "asset_id": null,
+            "data": null,
+            "metadata": null
+          },
+          "title": "Audio",
+          "description": "The input audio file to segment."
+        },
+        {
+          "name": "onsets",
+          "type": {
+            "type": "np_array"
+          },
+          "default": {
+            "type": "np_array",
+            "value": null,
+            "dtype": "<i8",
+            "shape": [
+              1
+            ]
+          },
+          "title": "Onsets",
+          "description": "The onset times detected in the audio."
+        },
+        {
+          "name": "min_segment_length",
+          "type": {
+            "type": "float"
+          },
+          "default": 0.1,
+          "title": "Min Segment Length",
+          "description": "Minimum length of a segment in seconds."
+        }
+      ],
+      "outputs": [
+        {
+          "type": {
+            "type": "list",
+            "type_args": [
+              {
+                "type": "audio"
+              }
+            ]
+          },
+          "name": "output"
+        }
+      ],
+      "basic_fields": [
+        "audio",
+        "onsets",
+        "min_segment_length"
       ]
     }
   ],
